@@ -21,7 +21,6 @@ Running log of the portfolio build. An entry is added after every major step/goa
 
 - Read all four spec files (`CLAUDE.md`, `PROJECT_SPEC.md`, `DESIGN_SYSTEM.md`,
   `QA_CHECKLIST.md`) and produced an implementation plan.
-- Adopted this file (`memory.md`) as the running build log.
 
 ## 2026-08-21 — Scaffold started, paused mid-`npm install`
 
@@ -34,8 +33,13 @@ Running log of the portfolio build. An entry is added after every major step/goa
 
 ## 2026-09-13 — Phase 2 Complete: Content Architecture & Page Views
 
-- Created stacked branch `feat/02-routes-content`.
-- Implemented typed content datasets in `src/content/` (`projects.ts` with 4 case studies, `experience.ts`, `profile.ts`).
-- Created complete route page views (`LandingPage`, `AboutPage`, `ProjectsPage`, `ExperiencePage`, `ContactPage`, `OfflinePage`, `NotFoundPage`).
+- Implemented typed content datasets in `src/content/` (`projects.ts`, `experience.ts`, `profile.ts`).
+- Built route views (`LandingPage`, `AboutPage`, `ProjectsPage`, `ExperiencePage`, `ContactPage`, `OfflinePage`, `NotFoundPage`).
+- Committed Phase 2 locally on `feat/02-routes-content` (`36020af`).
+
+## 2026-09-13 — Phase 3 Complete: Shared UI Component Library
+
+- Created stacked branch `feat/03-shared-components`.
+- Complete component library verified: `PageShell` (header/footer/nav), `Button`, `TagList`, `SectionHeading`, `Callout`, `MediaFrame`, `ProjectCard`, and `StatusBadge`.
 - Confirmed zero TypeScript errors with `npx tsc --noEmit`.
-- Committed Phase 2 locally on `feat/02-routes-content` (no remote push per owner instruction).
+- Committed Phase 3 locally on `feat/03-shared-components` (no remote push per owner instruction).

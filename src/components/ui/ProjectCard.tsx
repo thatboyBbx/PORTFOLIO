@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { CaseStudy } from '../../content/projects';
 import TagList from './TagList';
+import StatusBadge from './StatusBadge';
 import styles from './ProjectCard.module.css';
 
 export interface ProjectCardProps {
@@ -15,7 +16,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, className = '
       <div className={styles.cardHeader}>
         <div className={styles.metaRow}>
           <span className={styles.category}>{project.category}</span>
-          <span className={styles.status}>{project.status}</span>
+          <StatusBadge status={project.status} />
         </div>
         <h3 className={styles.title}>{project.title}</h3>
         <p className={styles.tagline}>{project.tagline}</p>
