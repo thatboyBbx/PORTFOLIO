@@ -101,7 +101,7 @@ export const PageShell: React.FC = () => {
       </header>
 
       {/* Main Content Landmark */}
-      <main id="main-content" className={styles.main}>
+      <main id="main-content" className={`${styles.main} page-enter`}>
         <Outlet />
       </main>
 

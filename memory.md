@@ -44,7 +44,13 @@ Running log of the portfolio build. An entry is added after every major step/goa
 
 ## 2026-09-13 — Phase 4 Complete: Case Study Detail Pages
 
-- Created stacked branch `feat/04-case-studies`.
-- Built full `CaseStudyPage.tsx` with standard 8-section layout: Problem & Context, Constraints, System Architecture & MediaFrame SVG fallback, Technical Decisions & Trade-Offs, Technology Stack, Evaluation & Outcomes, and Resource Links.
+- Built full `CaseStudyPage.tsx` with standard 8-section layout.
+- Committed Phase 4 locally on `feat/04-case-studies` (`36c7b80`).
+
+## 2026-09-13 — Phase 5 Complete: Motion Polish, Micro-interactions, & PWA Offline Setup
+
+- Created stacked branch `feat/05-motion-pwa`.
+- Added `vite-plugin-pwa/client` type definitions and registered service worker in `main.tsx`.
+- Added smooth `.page-enter` fade-in route transitions with `prefers-reduced-motion` overrides in `global.css` and `PageShell.tsx`.
 - Confirmed zero TypeScript errors with `npx tsc --noEmit`.
-- Committed Phase 4 locally on `feat/04-case-studies` (no remote push per owner instruction).
+- Committed Phase 5 locally on `feat/05-motion-pwa` (no remote push per owner instruction).
