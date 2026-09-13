@@ -25,47 +25,47 @@ export interface ProfileData {
 }
 
 export const profileData: ProfileData = {
-  name: 'Alex Vance',
-  headline: 'Computer Scientist & Application Engineer specializing in AI/ML',
-  subheadline: 'Designing, building, and shipping intelligent software systems—from neural retrieval models to high-throughput application runtimes.',
+  name: 'Panashe Bobojani',
+  headline: 'Software systems for real operational problems.',
+  subheadline: 'Application development with an AI & ML specialization. Based in Harare, Zimbabwe.',
   bio: [
-    'I am a Computer Scientist and Application Engineer with over 6 years of experience building intelligent applications and data systems. My focus sits at the intersection of modern application development, machine learning engineering, and systems architecture.',
-    'Rather than treating AI as an isolated model in a notebook or building simple wrapper web pages, I specialize in architecting complete, robust software products. That means designing low-latency vector search indices, building drift-resilient streaming feature stores, optimizing SIMD execution runtimes, and wrapping them in intuitive, accessible user interfaces.',
-    'I hold a B.S. in Computer Science with an emphasis on Artificial Intelligence and Systems Engineering. I value technical clarity, empirical benchmarks, clean code organization, and deliberate visual design.'
+    'I build software systems around real operational problems.',
+    'My work sits between application development, systems thinking, and AI/ML — from workflow-heavy business applications to document intelligence and predictive systems.',
+    'My background is in Computer Science with a specialization in Artificial Intelligence and Machine Learning. I focus on software systems that solve concrete operational bottlenecks rather than building standalone models or generic frontend interfaces.'
   ],
   education: [
     {
       degree: 'Bachelor of Science (B.S.)',
       field: 'Computer Science & Software Engineering',
       institution: 'University of Technology',
-      year: '2019',
-      honors: 'Summa Cum Laude • Specialized in Machine Learning & Systems'
+      year: '2023',
+      honors: 'Specialization in Artificial Intelligence & Machine Learning'
     }
   ],
   workingPrinciples: [
     {
       title: 'Systems Over Standalone Models',
-      description: 'An AI model is only as effective as the data pipelines, serving infrastructure, score decomposition, and user interaction design surrounding it.'
+      description: 'An AI/ML component is valuable only when integrated cleanly into a robust, stateful application architecture and real operational workflow.'
     },
     {
-      title: 'Empirical Evidence & Trade-Off Rigor',
-      description: 'Every technical choice—from hybrid vector fusion algorithms to SIMD quantization kernels—must be justified by empirical benchmarks and clear trade-off evaluations.'
+      title: 'Intentional Technology Choices',
+      description: 'Every language, database, framework, or model choice must justify its existence based on project constraints, offline requirements, and operational SLAs.'
     },
     {
-      title: 'Progressive Enhancement & Reliability',
-      description: 'Essential content, navigation, and user actions must remain fast, accessible, and understandable across any network condition, device viewport, or reduced-motion preference.'
+      title: 'Editorial Clarity & Restraint',
+      description: 'Visual interfaces and technical documentations should present information clearly without distracting animations, purple AI gradients, or manufactured claims.'
     },
     {
-      title: 'Restrained Craft & Technical Clarity',
-      description: 'Visual polish, typography, and motion serve to clarify technical content and hierarchy, never to mask missing substance or hinder content access.'
+      title: 'Honest Engineering Statements',
+      description: 'Demonstrating technical depth means being explicit about system boundaries, trade-offs, known limitations, and current project status.'
     }
   ],
   contact: {
-    email: 'alex.vance.eng@example.com',
-    location: 'San Francisco, CA / Remote',
+    email: 'panashe.bobojani@example.com',
+    location: 'Harare, Zimbabwe / Remote',
     github: 'https://github.com/thatboyBbx',
-    linkedin: 'https://linkedin.com/in/example-alex-vance',
-    resumeUrl: '/resume-placeholder.pdf',
-    availability: 'Open to Lead AI/ML Engineering & Systems Architecture roles'
+    linkedin: 'https://linkedin.com/in/example-panashe-bobojani',
+    resumeUrl: '/Panashe_Bobojani_CV.pdf',
+    availability: 'Open to software engineering & AI/ML systems roles'
   }
 };

@@ -27,9 +27,19 @@ Running log of the portfolio build. An entry is added after every major step/goa
 
 ## 2026-09-13 — Panashe Phase 1: Design Tokens & Typography Transformation
 
-- Created stacked branch `feat/08-panashe-design-tokens`.
-- Loaded Google Fonts: `Fraunces` (Serif Display), `Inter` (Sans UI/Body), and `IBM Plex Mono` (Technical) in `index.html`.
-- Implemented warm off-white editorial color palette (`--bg: #FAFAF8`, `--surface: #FFFFFF`, `--border: #E5E3DD`), slate blue interaction accent (`#3D5A80`), and dark technical panel surface tokens (`--panel-dark-bg: #0F1117`).
-- Updated `global.css` with Fraunces serif headings, sentence-case rules, 65ch paragraph max-widths, and high-contrast `:focus-visible` outlines.
+- Loaded Google Fonts (`Fraunces`, `Inter`, `IBM Plex Mono`).
+- Implemented warm off-white palette (`#FAFAF8`), slate blue accent (`#3D5A80`), and dark panel tokens (`#0F1117`).
+- Committed Phase 1 locally on `feat/08-panashe-design-tokens` (`0d9e61e`).
+
+## 2026-09-13 — Panashe Phase 2: Content Models & Technical Case Data
+
+- Created stacked branch `feat/09-panashe-content`.
+- Updated `profile.ts` for Panashe Bobojani (Application Developer & Computer Scientist, AI/ML Specialization, Harare, Zimbabwe).
+- Replaced project dataset in `projects.ts` with 4 primary case studies:
+  1. `insureintel` — InsureIntel Zimbabwe (Flagship AI/ML OCR & Document Intelligence)
+  2. `spop` — SPOP Spare-Parts Operational Software (Offline-first ERP)
+  3. `autodirect` — AutoDirect Automotive Platform (State transitions & Firestore locking)
+  4. `foodies` — Foodies System (Multi-interface KDS & QR ordering)
+- Updated `experience.ts` grouped capabilities (APPLICATION, AI/ML, SYSTEMS, DATA).
 - Confirmed zero TypeScript errors with `npx tsc --noEmit`.
-- Committed Phase 1 locally on `feat/08-panashe-design-tokens` (no remote push per owner instruction).
+- Committed Phase 2 locally on `feat/09-panashe-content` (no remote push per owner instruction).
