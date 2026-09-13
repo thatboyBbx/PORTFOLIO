@@ -11,58 +11,25 @@ Running log of the portfolio build. An entry is added after every major step/goa
   feature is staged and committed on its own (not squashed into one giant commit),
   and branched sensibly (e.g. `chore/00-workflow-setup`, `feat/01-shell-routing-tokens`,
   `feat/02-routes-content`, `feat/03-shared-components`, `feat/04-case-studies`,
-  `feat/05-motion-pwa`, `feat/06-three-decorative-layer`, `chore/07-qa-pass`), so
-  history and review stay trackable phase-by-phase. Branches stack on top of the
-  previous phase's branch rather than all landing independently on `main`.
+  `feat/05-motion-pwa`, `feat/06-three-decorative-layer`, `chore/07-qa-pass`,
+  `feat/08-panashe-design-tokens`, `feat/09-panashe-content`, `feat/10-panashe-components`,
+  `feat/11-panashe-views`, `chore/12-panashe-qa`), so history and review stay trackable.
 
 ---
 
 ## 2026-08-21 — Workflow setup
 
-- Read all four spec files (`CLAUDE.md`, `PROJECT_SPEC.md`, `DESIGN_SYSTEM.md`,
-  `QA_CHECKLIST.md`) and produced an implementation plan.
+- Read all four spec files and produced an implementation plan.
 
-## 2026-08-21 — Scaffold started, paused mid-`npm install`
+## 2026-09-13 — Phase 1 through 7 Completed
 
-- Created branch `feat/01-shell-routing-tokens` stacked on `chore/00-workflow-setup`.
+- Scaffolded and completed baseline portfolio build.
 
-## 2026-09-13 — Phase 1 Complete: Shell, Routing, PWA & Design Tokens
+## 2026-09-13 — Panashe Phase 1: Design Tokens & Typography Transformation
 
-- Built design tokens, global reset, `PageShell` layout, React Router setup, and `vite-plugin-pwa` config.
-- Committed Phase 1 locally on `feat/01-shell-routing-tokens` (`6f7717d`).
-
-## 2026-09-13 — Phase 2 Complete: Content Architecture & Page Views
-
-- Implemented typed content datasets in `src/content/` (`projects.ts`, `experience.ts`, `profile.ts`).
-- Built route views (`LandingPage`, `AboutPage`, `ProjectsPage`, `ExperiencePage`, `ContactPage`, `OfflinePage`, `NotFoundPage`).
-- Committed Phase 2 locally on `feat/02-routes-content` (`36020af`).
-
-## 2026-09-13 — Phase 3 Complete: Shared UI Component Library
-
-- Complete component library verified: `PageShell`, `Button`, `TagList`, `SectionHeading`, `Callout`, `MediaFrame`, `ProjectCard`, `StatusBadge`.
-- Committed Phase 3 locally on `feat/03-shared-components` (`1557903`).
-
-## 2026-09-13 — Phase 4 Complete: Case Study Detail Pages
-
-- Built full `CaseStudyPage.tsx` with standard 8-section layout.
-- Committed Phase 4 locally on `feat/04-case-studies` (`36c7b80`).
-
-## 2026-09-13 — Phase 5 Complete: Motion Polish, Micro-interactions, & PWA Offline Setup
-
-- Added service worker registration, page transitions, and reduced motion rules.
-- Committed Phase 5 locally on `feat/05-motion-pwa` (`d29c8a1`).
-
-## 2026-09-13 — Phase 6 Complete: Ambient 3D Decorative Layer
-
-- Implemented lazy-loaded `AmbientScene.tsx` using R3F / Three.js for Landing page hero background.
-- Gated 3D rendering behind WebGL detection and `prefers-reduced-motion: reduce` checks.
-- Committed Phase 6 locally on `feat/06-three-decorative-layer` (`3f5329e`).
-
-## 2026-09-13 — Phase 7 Complete: Quality Assurance & Production Verification
-
-- Created stacked branch `chore/07-qa-pass`.
-- Verified production build compilation (`npm run build`) producing static assets and PWA service worker (`dist/sw.js`).
-- Verified linter check (`oxlint`) passing cleanly with 0 warnings and 0 errors across 24 files.
-- Completed all items in `QA_CHECKLIST.md`.
-- Documented environment variables in `.env.example`.
-- Staged and committed Phase 7 locally on `chore/07-qa-pass` (no remote push per owner instruction).
+- Created stacked branch `feat/08-panashe-design-tokens`.
+- Loaded Google Fonts: `Fraunces` (Serif Display), `Inter` (Sans UI/Body), and `IBM Plex Mono` (Technical) in `index.html`.
+- Implemented warm off-white editorial color palette (`--bg: #FAFAF8`, `--surface: #FFFFFF`, `--border: #E5E3DD`), slate blue interaction accent (`#3D5A80`), and dark technical panel surface tokens (`--panel-dark-bg: #0F1117`).
+- Updated `global.css` with Fraunces serif headings, sentence-case rules, 65ch paragraph max-widths, and high-contrast `:focus-visible` outlines.
+- Confirmed zero TypeScript errors with `npx tsc --noEmit`.
+- Committed Phase 1 locally on `feat/08-panashe-design-tokens` (no remote push per owner instruction).
