@@ -39,7 +39,12 @@ Running log of the portfolio build. An entry is added after every major step/goa
 
 ## 2026-09-13 — Phase 3 Complete: Shared UI Component Library
 
-- Created stacked branch `feat/03-shared-components`.
-- Complete component library verified: `PageShell` (header/footer/nav), `Button`, `TagList`, `SectionHeading`, `Callout`, `MediaFrame`, `ProjectCard`, and `StatusBadge`.
+- Complete component library verified: `PageShell`, `Button`, `TagList`, `SectionHeading`, `Callout`, `MediaFrame`, `ProjectCard`, `StatusBadge`.
+- Committed Phase 3 locally on `feat/03-shared-components` (`1557903`).
+
+## 2026-09-13 — Phase 4 Complete: Case Study Detail Pages
+
+- Created stacked branch `feat/04-case-studies`.
+- Built full `CaseStudyPage.tsx` with standard 8-section layout: Problem & Context, Constraints, System Architecture & MediaFrame SVG fallback, Technical Decisions & Trade-Offs, Technology Stack, Evaluation & Outcomes, and Resource Links.
 - Confirmed zero TypeScript errors with `npx tsc --noEmit`.
-- Committed Phase 3 locally on `feat/03-shared-components` (no remote push per owner instruction).
+- Committed Phase 4 locally on `feat/04-case-studies` (no remote push per owner instruction).
