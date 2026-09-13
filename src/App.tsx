@@ -1,9 +1,9 @@
 import React, { lazy, Suspense } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import PageShell from './components/layout/PageShell';
 import './styles/global.css';
 
-// Lazy-loaded routes for performance & modular code splitting
+// Lazy-loaded route views
 const LandingPage = lazy(() => import('./pages/LandingPage'));
 const AboutPage = lazy(() => import('./pages/AboutPage'));
 const ProjectsPage = lazy(() => import('./pages/ProjectsPage'));
@@ -18,12 +18,12 @@ const PageLoader: React.FC = () => (
     <div
       style={{
         display: 'inline-block',
-        width: '32px',
-        height: '32px',
-        border: '3px solid var(--color-border)',
-        borderTopColor: 'var(--color-accent)',
+        width: '24px',
+        height: '24px',
+        border: '2px solid var(--border)',
+        borderTopColor: 'var(--accent)',
         borderRadius: '50%',
-        animation: 'spin 1s linear infinite',
+        animation: 'spin 0.8s linear infinite',
       }}
       aria-label="Loading page content"
     />
@@ -50,18 +50,22 @@ export const App: React.FC = () => {
             }
           />
           <Route
-            path="about"
+            path="work"
             element={
               <Suspense fallback={<PageLoader />}>
-                <AboutPage />
+                <ProjectsPage />
               </Suspense>
             }
           />
           <Route
             path="projects"
+            element={<Navigate to="/work" replace />}
+          />
+          <Route
+            path="work/:slug"
             element={
               <Suspense fallback={<PageLoader />}>
-                <ProjectsPage />
+                <CaseStudyPage />
               </Suspense>
             }
           />
@@ -70,6 +74,14 @@ export const App: React.FC = () => {
             element={
               <Suspense fallback={<PageLoader />}>
                 <CaseStudyPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path="about"
+            element={
+              <Suspense fallback={<PageLoader />}>
+                <AboutPage />
               </Suspense>
             }
           />

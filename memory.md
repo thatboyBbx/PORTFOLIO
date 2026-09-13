@@ -38,9 +38,15 @@ Running log of the portfolio build. An entry is added after every major step/goa
 
 ## 2026-09-13 — Panashe Phase 3: Technical Panel & UI Components
 
-- Created stacked branch `feat/10-panashe-components`.
-- Built `TechnicalPanel.tsx` component & CSS Module (`#0F1117` monospace stack & ASCII diagram container).
-- Updated `PageShell.tsx` with Panashe Bobojani index navigation header (`Work`, `About`, `Contact`, `Resume ↗`) and minimal footer.
-- Refactored `ProjectCard.tsx` into editorial case-file record layout (`01 INSUREINTEL ... Problem → System → ... View case file →`).
+- Built `TechnicalPanel.tsx`, Panashe index header navigation, and case-file record layout.
+- Committed Phase 3 locally on `feat/10-panashe-components` (`58202f9`).
+
+## 2026-09-13 — Panashe Phase 4: Editorial Landing Page & Case File Views
+
+- Created stacked branch `feat/11-panashe-views`.
+- Mapped `/work` and `/work/:slug` routes in `App.tsx`.
+- Implemented Panashe editorial composition in `LandingPage.tsx` (`Panashe Bobojani` ... `Software systems for real operational problems`).
+- Built 8-section interactive case file view in `CaseStudyPage.tsx` with sticky section navigation index (`01 Context` ... `08 Outcome`).
+- Refactored `AboutPage.tsx` and `ContactPage.tsx` with Fraunces display serif headings and direct communication options.
 - Confirmed zero TypeScript errors with `npx tsc --noEmit`.
-- Committed Phase 3 locally on `feat/10-panashe-components` (no remote push per owner instruction).
+- Committed Phase 4 locally on `feat/11-panashe-views` (no remote push per owner instruction).

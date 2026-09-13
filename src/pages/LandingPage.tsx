@@ -1,33 +1,20 @@
-import React, { lazy, Suspense } from 'react';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import { projectsData } from '../content/projects';
-import { capabilityGroups } from '../content/experience';
 import { profileData } from '../content/profile';
 import ProjectCard from '../components/ui/ProjectCard';
-import SectionHeading from '../components/ui/SectionHeading';
-import Button from '../components/ui/Button';
-import TagList from '../components/ui/TagList';
 import styles from './LandingPage.module.css';
-
-const AmbientScene = lazy(() => import('../components/3d/AmbientScene'));
 
 export const LandingPage: React.FC = () => {
   return (
     <div className="container">
       {/* Hero Section */}
       <section className={styles.hero} aria-labelledby="hero-title">
-        <Suspense fallback={null}>
-          <AmbientScene />
-        </Suspense>
-
         <div className={styles.heroContent}>
-          <div className={styles.eyebrow}>
-            <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'var(--color-success)', display: 'inline-block' }} />
-            {profileData.contact.availability}
-          </div>
+          <div className={styles.nameHeader}>{profileData.name}</div>
 
           <h1 id="hero-title" className={styles.title}>
-            Computer Scientist & <br />
-            <span className={styles.titleAccent}>AI / ML Application Engineer</span>
+            Software systems for real operational problems.
           </h1>
 
           <p className={styles.description}>
@@ -35,65 +22,67 @@ export const LandingPage: React.FC = () => {
           </p>
 
           <div className={styles.actions}>
-            <Button to="/projects" variant="primary">
-              Explore Case Studies
-            </Button>
-            <Button to="/contact" variant="secondary">
-              Contact & Resume
-            </Button>
+            <a href="#selected-work" className={styles.actionLink}>
+              View selected work →
+            </a>
           </div>
         </div>
       </section>
 
-      {/* Featured Projects Section */}
-      <section className={styles.section} aria-labelledby="featured-projects-title">
-        <SectionHeading
-          eyebrow="Portfolio Archive"
-          title="Featured Case Studies"
-          description="Substantial engineering projects demonstrating intelligent applications, real-time feature pipelines, edge model runtimes, and physiological signal classification."
-        />
+      {/* Selected Work Section */}
+      <section id="selected-work" className={styles.section} aria-labelledby="work-title">
+        <div className={styles.sectionHeader}>
+          <span className={styles.sectionTitle}>SELECTED WORK</span>
+          <span className={styles.sectionTitle}>04 CASE FILES</span>
+        </div>
 
-        <div className={styles.projectGrid}>
+        <div className={styles.workList}>
           {projectsData.map((project) => (
             <ProjectCard key={project.id} project={project} />
           ))}
         </div>
       </section>
 
-      {/* Technical Capabilities Section */}
-      <section className={styles.section} aria-labelledby="capabilities-title">
-        <SectionHeading
-          eyebrow="Core Competencies"
-          title="Engineering & AI/ML Capabilities"
-          description="A structured overview of technical domain experience spanning neural model architectures, frontend applications, and systems design."
-        />
-
-        <div className={styles.capabilitiesGrid}>
-          {capabilityGroups.map((group) => (
-            <div key={group.category} className={styles.capabilityCard}>
-              <h3 className={styles.capabilityTitle}>{group.category}</h3>
-              <p className={styles.capabilityDesc}>{group.description}</p>
-              <TagList tags={group.skills} />
-            </div>
-          ))}
+      {/* About Summary Section */}
+      <section className={styles.aboutBox} aria-labelledby="about-summary-title">
+        <div>
+          <span className={styles.sectionTitle}>ABOUT</span>
+        </div>
+        <div>
+          <h2 id="about-summary-title" style={{ fontFamily: 'var(--font-display)', fontSize: 'var(--text-xl)', marginBottom: 'var(--space-4)' }}>
+            Computer scientist. Application developer. AI/ML specialization.
+          </h2>
+          <p style={{ fontSize: 'var(--text-base)', color: 'var(--text-secondary)', marginBottom: 'var(--space-4)' }}>
+            I build software systems around real operational problems. My work sits between application development, systems thinking, and AI/ML — from workflow-heavy business applications to document intelligence and predictive systems.
+          </p>
+          <Link to="/about" className={styles.actionLink}>
+            Read full profile & principles →
+          </Link>
         </div>
       </section>
 
-      {/* Contact CTA Section */}
-      <section className={styles.section}>
-        <div className={styles.ctaBox}>
-          <h2>Interested in collaborating or hiring?</h2>
-          <p style={{ color: 'var(--color-text-secondary)', maxWidth: '540px' }}>
-            Open to lead engineering positions, technical architecture roles, and intelligent systems consulting.
-          </p>
-          <div className={styles.actions}>
-            <Button to="/contact" variant="primary">
-              Get In Touch
-            </Button>
-            <Button to="/about" variant="quiet">
-              Read Engineering Approach
-            </Button>
-          </div>
+      {/* Contact Section (Section 19 of Guide) */}
+      <section className={styles.contactBox} aria-labelledby="contact-summary-title">
+        <span className={styles.sectionTitle}>CONTACT</span>
+        <h2 id="contact-summary-title" className={styles.contactTitle}>
+          Have a problem worth building around?
+        </h2>
+        <p style={{ fontSize: 'var(--text-base)', color: 'var(--text-secondary)' }}>
+          If you're working on a product, internal system, automation workflow or AI/ML application, get in touch.
+        </p>
+        <div className={styles.contactLinks}>
+          <a href={`mailto:${profileData.contact.email}`} className={styles.actionLink}>
+            Email → {profileData.contact.email}
+          </a>
+          <a href={profileData.contact.linkedin} target="_blank" rel="noopener noreferrer" className={styles.actionLink}>
+            LinkedIn ↗
+          </a>
+          <a href={profileData.contact.github} target="_blank" rel="noopener noreferrer" className={styles.actionLink}>
+            GitHub ↗
+          </a>
+          <a href={profileData.contact.resumeUrl} target="_blank" rel="noopener noreferrer" className={styles.actionLink}>
+            Download CV ↗
+          </a>
         </div>
       </section>
     </div>

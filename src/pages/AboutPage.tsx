@@ -1,19 +1,21 @@
 import React from 'react';
 import { profileData } from '../content/profile';
-import SectionHeading from '../components/ui/SectionHeading';
-import Callout from '../components/ui/Callout';
+import { capabilityGroups } from '../content/experience';
 import styles from './AboutPage.module.css';
 
 export const AboutPage: React.FC = () => {
   return (
-    <div className="container">
+    <div className="container" style={{ padding: 'var(--space-12) var(--space-4) var(--space-24) var(--space-4)' }}>
       <header className={styles.header}>
-        <SectionHeading
-          eyebrow="Profile & Background"
-          title="About & Engineering Philosophy"
-          description="Combining foundational computer science principles, system architecture, and modern machine learning application engineering."
-          level={1}
-        />
+        <div style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', color: 'var(--accent)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 'var(--space-2)' }}>
+          ABOUT & BACKGROUND
+        </div>
+        <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 'var(--text-3xl)', marginBottom: 'var(--space-4)' }}>
+          Panashe Bobojani
+        </h1>
+        <p style={{ fontSize: 'var(--text-xl)', color: 'var(--text-secondary)', maxWidth: 'var(--max-width-prose)' }}>
+          I build software systems around real operational problems.
+        </p>
       </header>
 
       <article className={styles.bioSection}>
@@ -24,36 +26,47 @@ export const AboutPage: React.FC = () => {
         ))}
       </article>
 
-      {/* Working Principles */}
-      <section className={styles.section} aria-labelledby="principles-heading">
-        <SectionHeading
-          eyebrow="Methodology"
-          title="Engineering & ML Working Principles"
-          description="The core tenets that guide technical decisions, system design trade-offs, and software craft."
-        />
+      {/* Technical Capabilities */}
+      <section className={styles.section} aria-labelledby="skills-heading">
+        <div style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', color: 'var(--accent)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 'var(--space-2)' }}>
+          TECHNICAL PROFILE
+        </div>
+        <h2 id="skills-heading" style={{ fontFamily: 'var(--font-display)', fontSize: 'var(--text-2xl)', marginBottom: 'var(--space-6)' }}>
+          Grouped Capabilities
+        </h2>
 
         <div className={styles.grid}>
-          {profileData.workingPrinciples.map((principle) => (
-            <Callout key={principle.title} type="decision" title={principle.title}>
-              {principle.description}
-            </Callout>
+          {capabilityGroups.map((group) => (
+            <div key={group.category} className={styles.card}>
+              <h3 style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', color: 'var(--accent)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+                {group.category}
+              </h3>
+              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 'var(--space-1)' }}>
+                {group.skills.map((skill) => (
+                  <li key={skill} style={{ fontSize: 'var(--text-sm)', color: 'var(--text-primary)' }}>
+                    {skill}
+                  </li>
+                ))}
+              </ul>
+            </div>
           ))}
         </div>
       </section>
 
-      {/* Education & Credentials */}
-      <section className={styles.section} aria-labelledby="education-heading">
-        <SectionHeading
-          eyebrow="Academic Credentials"
-          title="Education & Foundations"
-        />
+      {/* Principles */}
+      <section className={styles.section} aria-labelledby="principles-heading">
+        <div style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', color: 'var(--accent)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 'var(--space-2)' }}>
+          ENGINEERING METHODOLOGY
+        </div>
+        <h2 id="principles-heading" style={{ fontFamily: 'var(--font-display)', fontSize: 'var(--text-2xl)', marginBottom: 'var(--space-6)' }}>
+          Working Principles
+        </h2>
 
         <div className={styles.grid}>
-          {profileData.education.map((edu) => (
-            <div key={edu.degree} className={styles.card}>
-              <h3 className={styles.cardTitle}>{edu.degree} — {edu.field}</h3>
-              <p className={styles.cardSub}>{edu.institution} • {edu.year}</p>
-              {edu.honors && <p className={styles.cardDesc}>{edu.honors}</p>}
+          {profileData.workingPrinciples.map((principle) => (
+            <div key={principle.title} className={styles.card}>
+              <h3 className={styles.cardTitle}>{principle.title}</h3>
+              <p className={styles.cardDesc}>{principle.description}</p>
             </div>
           ))}
         </div>
