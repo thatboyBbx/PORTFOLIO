@@ -1,7 +1,13 @@
-import React, { useRef, useMemo, useEffect, useState } from 'react';
+import React, { useRef, useMemo, useState } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 import styles from './AmbientScene.module.css';
+
+// Simple deterministic pseudo-random helper to satisfy linter purity rules
+function pseudoRandom(seed: number) {
+  const x = Math.sin(seed++) * 10000;
+  return x - Math.floor(x);
+}
 
 const NeuralNodes: React.FC = () => {
   const pointsRef = useRef<THREE.Points>(null!);
@@ -14,11 +20,11 @@ const NeuralNodes: React.FC = () => {
     const border = new THREE.Color('#334155');
 
     for (let i = 0; i < count; i++) {
-      pos[i * 3] = (Math.random() - 0.5) * 8;
-      pos[i * 3 + 1] = (Math.random() - 0.5) * 8;
-      pos[i * 3 + 2] = (Math.random() - 0.5) * 8;
+      pos[i * 3] = (pseudoRandom(i * 3 + 1) - 0.5) * 8;
+      pos[i * 3 + 1] = (pseudoRandom(i * 3 + 2) - 0.5) * 8;
+      pos[i * 3 + 2] = (pseudoRandom(i * 3 + 3) - 0.5) * 8;
 
-      const mixColor = Math.random() > 0.4 ? cyan : border;
+      const mixColor = pseudoRandom(i + 100) > 0.4 ? cyan : border;
       col[i * 3] = mixColor.r;
       col[i * 3 + 1] = mixColor.g;
       col[i * 3 + 2] = mixColor.b;
@@ -27,7 +33,7 @@ const NeuralNodes: React.FC = () => {
     return [pos, col];
   }, [count]);
 
-  useFrame((state) => {
+  useFrame((state: { clock: THREE.Clock }) => {
     if (pointsRef.current) {
       pointsRef.current.rotation.y = state.clock.getElapsedTime() * 0.04;
       pointsRef.current.rotation.x = Math.sin(state.clock.getElapsedTime() * 0.02) * 0.1;
@@ -58,10 +64,10 @@ const NeuralNodes: React.FC = () => {
 };
 
 export const AmbientScene: React.FC = () => {
-  const [shouldRender, setShouldRender] = useState(false);
+  // Lazy state initialization to prevent synchronous setState inside useEffect
+  const [shouldRender] = useState<boolean>(() => {
+    if (typeof window === 'undefined') return false;
 
-  useEffect(() => {
-    // Check reduced motion preference & WebGL support before mounting
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     const hasWebGL = (() => {
       try {
@@ -72,10 +78,8 @@ export const AmbientScene: React.FC = () => {
       }
     })();
 
-    if (!mediaQuery.matches && hasWebGL) {
-      setShouldRender(true);
-    }
-  }, []);
+    return !mediaQuery.matches && hasWebGL;
+  });
 
   if (!shouldRender) {
     return null;

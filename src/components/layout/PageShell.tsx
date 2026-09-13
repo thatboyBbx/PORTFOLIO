@@ -43,7 +43,7 @@ export const PageShell: React.FC = () => {
                 key={item.path}
                 to={item.path}
                 end={item.path === '/'}
-                className={({ isActive }) =>
+                className={({ isActive }: { isActive: boolean }) =>
                   `${styles.navLink} ${isActive ? styles.navLinkActive : ''}`
                 }
               >
@@ -89,7 +89,7 @@ export const PageShell: React.FC = () => {
                 to={item.path}
                 end={item.path === '/'}
                 onClick={closeMobileMenu}
-                className={({ isActive }) =>
+                className={({ isActive }: { isActive: boolean }) =>
                   `${styles.navLink} ${isActive ? styles.navLinkActive : ''}`
                 }
               >

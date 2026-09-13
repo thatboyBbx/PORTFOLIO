@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { CaseStudy } from '../../content/projects';
+import type { CaseStudy } from '../../content/projects';
 import TagList from './TagList';
 import StatusBadge from './StatusBadge';
 import styles from './ProjectCard.module.css';

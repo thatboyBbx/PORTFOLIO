@@ -16,7 +16,7 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
   level = 2,
   className = '',
 }) => {
-  const HeadingTag = `h${level}` as keyof JSX.IntrinsicElements;
+  const HeadingTag = (['h1', 'h2', 'h3'][level - 1] || 'h2') as 'h1' | 'h2' | 'h3';
 
   return (
     <header className={`${styles.header} ${className}`}>
