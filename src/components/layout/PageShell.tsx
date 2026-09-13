@@ -14,9 +14,7 @@ export const PageShell: React.FC = () => {
   };
 
   const navItems = [
-    { label: 'Overview', path: '/' },
-    { label: 'Projects', path: '/projects' },
-    { label: 'Experience', path: '/experience' },
+    { label: 'Work', path: '/' },
     { label: 'About', path: '/about' },
     { label: 'Contact', path: '/contact' },
   ];
@@ -32,8 +30,7 @@ export const PageShell: React.FC = () => {
       <header className={styles.header}>
         <div className={`container ${styles.headerInner}`}>
           <Link to="/" className={styles.brand} onClick={closeMobileMenu}>
-            <span>Alex Vance</span>
-            <span className={styles.brandBadge}>AI / ML Systems</span>
+            <span>Panashe Bobojani</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -50,6 +47,14 @@ export const PageShell: React.FC = () => {
                 {item.label}
               </NavLink>
             ))}
+            <a
+              href="/Panashe_Bobojani_CV.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.navLink}
+            >
+              Resume ↗
+            </a>
           </nav>
 
           {/* Mobile Menu Toggle */}
@@ -96,6 +101,15 @@ export const PageShell: React.FC = () => {
                 {item.label}
               </NavLink>
             ))}
+            <a
+              href="/Panashe_Bobojani_CV.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={closeMobileMenu}
+              className={styles.navLink}
+            >
+              Resume ↗
+            </a>
           </nav>
         )}
       </header>
@@ -105,22 +119,22 @@ export const PageShell: React.FC = () => {
         <Outlet />
       </main>
 
-      {/* Footer Landmark */}
+      {/* Footer Landmark (Section 27 of Guide) */}
       <footer className={styles.footer}>
         <div className={`container ${styles.footerInner}`}>
           <div className={styles.footerInfo}>
-            <p className={styles.footerTitle}>Computer Scientist & Application Engineer</p>
+            <p className={styles.footerTitle}>Panashe Bobojani</p>
             <p className={styles.footerMeta}>
-              Specializing in AI/ML engineering, system architecture, & scalable applications.
+              Application development • AI/ML • Software systems
             </p>
+            <p className={styles.footerMeta}>Harare, Zimbabwe</p>
           </div>
 
           <div className={styles.footerLinks}>
-            <Link to="/about" className={styles.footerLink}>About</Link>
-            <Link to="/projects" className={styles.footerLink}>Projects</Link>
-            <Link to="/experience" className={styles.footerLink}>Capabilities</Link>
-            <Link to="/contact" className={styles.footerLink}>Contact</Link>
-            <Link to="/offline" className={styles.footerLink}>Offline Status</Link>
+            <a href="mailto:panashe.bobojani@example.com" className={styles.footerLink}>Email</a>
+            <a href="https://github.com/thatboyBbx" target="_blank" rel="noopener noreferrer" className={styles.footerLink}>GitHub ↗</a>
+            <a href="https://linkedin.com/in/example-panashe-bobojani" target="_blank" rel="noopener noreferrer" className={styles.footerLink}>LinkedIn ↗</a>
+            <a href="/Panashe_Bobojani_CV.pdf" target="_blank" rel="noopener noreferrer" className={styles.footerLink}>CV ↗</a>
           </div>
         </div>
       </footer>

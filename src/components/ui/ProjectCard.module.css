@@ -1,105 +1,103 @@
-.card {
+.record {
   display: flex;
   flex-direction: column;
-  background-color: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-xl);
-  overflow: hidden;
-  transition: transform var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+  padding: var(--space-8) 0;
+  border-top: 1px solid var(--border);
   text-decoration: none;
-  color: var(--color-text);
-  height: 100%;
+  color: var(--text-primary);
+  transition: border-color var(--transition-fast);
 }
 
-.card:hover {
-  transform: translateY(-3px);
-  border-color: var(--color-border-hover);
-  box-shadow: var(--shadow-lg), var(--shadow-glow);
+.record:hover {
+  border-top-color: var(--accent);
 }
 
-.cardHeader {
-  padding: var(--space-6) var(--space-6) var(--space-4) var(--space-6);
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
+.recordInner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
 }
 
-.metaRow {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-2);
+@media (min-width: 840px) {
+  .recordInner {
+    grid-template-columns: 1.2fr 1fr;
+  }
 }
 
-.category {
+.number {
   font-family: var(--font-mono);
-  font-size: var(--text-xs);
-  color: var(--color-accent);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  font-weight: 600;
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+  margin-bottom: var(--space-2);
 }
 
-.status {
-  font-family: var(--font-mono);
-  font-size: var(--text-xs);
-  padding: 2px var(--space-2);
-  border-radius: var(--radius-sm);
-  background: var(--color-surface-hover);
-  border: 1px solid var(--color-border);
-  color: var(--color-muted);
+.titleRow {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+  margin-bottom: var(--space-2);
 }
 
 .title {
-  font-size: var(--text-h3);
-  font-weight: 700;
-  color: var(--color-text);
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: 600;
+  color: var(--text-primary);
   line-height: var(--line-height-heading);
 }
 
 .tagline {
-  color: var(--color-text-secondary);
-  font-size: var(--text-sm);
+  font-size: var(--text-base);
+  color: var(--text-secondary);
   line-height: var(--line-height-body);
-  margin-bottom: var(--space-3);
+  margin-bottom: var(--space-4);
+  max-width: var(--max-width-prose);
 }
 
-.metricsRow {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-2);
-  padding: var(--space-3) var(--space-6);
-  background: var(--color-bg);
-  border-top: 1px solid var(--color-border);
-  border-bottom: 1px solid var(--color-border);
-}
-
-.metricItem {
+.summaryFlow {
   display: flex;
   flex-direction: column;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
 }
 
-.metricValue {
+.flowItem {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+}
+
+.flowLabel {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--accent);
+  text-transform: uppercase;
+  font-weight: 500;
+  min-width: 70px;
+}
+
+.actionRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: var(--space-4);
+}
+
+.actionLink {
   font-family: var(--font-mono);
   font-size: var(--text-sm);
-  font-weight: 700;
-  color: var(--color-accent);
+  color: var(--accent);
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  transition: transform var(--transition-fast), color var(--transition-fast);
 }
 
-.metricLabel {
-  font-size: var(--text-xs);
-  color: var(--color-muted);
-}
-
-.cardFooter {
-  padding: var(--space-4) var(--space-6) var(--space-6) var(--space-6);
-  margin-top: auto;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-4);
-}
-
-.roleText {
-  font-size: var(--text-xs);
-  color: var(--color-muted);
+.record:hover .actionLink {
+  color: var(--accent-hover);
+  transform: translateX(4px);
 }

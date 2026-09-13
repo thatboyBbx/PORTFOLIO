@@ -33,13 +33,14 @@ Running log of the portfolio build. An entry is added after every major step/goa
 
 ## 2026-09-13 — Panashe Phase 2: Content Models & Technical Case Data
 
-- Created stacked branch `feat/09-panashe-content`.
-- Updated `profile.ts` for Panashe Bobojani (Application Developer & Computer Scientist, AI/ML Specialization, Harare, Zimbabwe).
-- Replaced project dataset in `projects.ts` with 4 primary case studies:
-  1. `insureintel` — InsureIntel Zimbabwe (Flagship AI/ML OCR & Document Intelligence)
-  2. `spop` — SPOP Spare-Parts Operational Software (Offline-first ERP)
-  3. `autodirect` — AutoDirect Automotive Platform (State transitions & Firestore locking)
-  4. `foodies` — Foodies System (Multi-interface KDS & QR ordering)
-- Updated `experience.ts` grouped capabilities (APPLICATION, AI/ML, SYSTEMS, DATA).
+- Updated profile data, capabilities, and 4 primary case studies (`insureintel`, `spop`, `autodirect`, `foodies`).
+- Committed Phase 2 locally on `feat/09-panashe-content` (`d461dac`).
+
+## 2026-09-13 — Panashe Phase 3: Technical Panel & UI Components
+
+- Created stacked branch `feat/10-panashe-components`.
+- Built `TechnicalPanel.tsx` component & CSS Module (`#0F1117` monospace stack & ASCII diagram container).
+- Updated `PageShell.tsx` with Panashe Bobojani index navigation header (`Work`, `About`, `Contact`, `Resume ↗`) and minimal footer.
+- Refactored `ProjectCard.tsx` into editorial case-file record layout (`01 INSUREINTEL ... Problem → System → ... View case file →`).
 - Confirmed zero TypeScript errors with `npx tsc --noEmit`.
-- Committed Phase 2 locally on `feat/09-panashe-content` (no remote push per owner instruction).
+- Committed Phase 3 locally on `feat/10-panashe-components` (no remote push per owner instruction).
