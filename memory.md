@@ -49,8 +49,13 @@ Running log of the portfolio build. An entry is added after every major step/goa
 
 ## 2026-09-13 — Phase 5 Complete: Motion Polish, Micro-interactions, & PWA Offline Setup
 
-- Created stacked branch `feat/05-motion-pwa`.
-- Added `vite-plugin-pwa/client` type definitions and registered service worker in `main.tsx`.
-- Added smooth `.page-enter` fade-in route transitions with `prefers-reduced-motion` overrides in `global.css` and `PageShell.tsx`.
+- Added service worker registration, page transitions, and reduced motion rules.
+- Committed Phase 5 locally on `feat/05-motion-pwa` (`d29c8a1`).
+
+## 2026-09-13 — Phase 6 Complete: Ambient 3D Decorative Layer
+
+- Created stacked branch `feat/06-three-decorative-layer`.
+- Implemented lazy-loaded `AmbientScene.tsx` using R3F / Three.js for Landing page hero background.
+- Gated 3D rendering behind WebGL detection and `prefers-reduced-motion: reduce` checks.
 - Confirmed zero TypeScript errors with `npx tsc --noEmit`.
-- Committed Phase 5 locally on `feat/05-motion-pwa` (no remote push per owner instruction).
+- Committed Phase 6 locally on `feat/06-three-decorative-layer` (no remote push per owner instruction).

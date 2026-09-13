@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { projectsData } from '../content/projects';
 import { capabilityGroups } from '../content/experience';
 import { profileData } from '../content/profile';
@@ -8,11 +8,17 @@ import Button from '../components/ui/Button';
 import TagList from '../components/ui/TagList';
 import styles from './LandingPage.module.css';
 
+const AmbientScene = lazy(() => import('../components/3d/AmbientScene'));
+
 export const LandingPage: React.FC = () => {
   return (
     <div className="container">
       {/* Hero Section */}
       <section className={styles.hero} aria-labelledby="hero-title">
+        <Suspense fallback={null}>
+          <AmbientScene />
+        </Suspense>
+
         <div className={styles.heroContent}>
           <div className={styles.eyebrow}>
             <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'var(--color-success)', display: 'inline-block' }} />
