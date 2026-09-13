@@ -1,27 +1,28 @@
 import React from 'react';
 import { experienceData, capabilityGroups } from '../content/experience';
-import SectionHeading from '../components/ui/SectionHeading';
 import TagList from '../components/ui/TagList';
 import styles from './ExperiencePage.module.css';
 
 export const ExperiencePage: React.FC = () => {
   return (
-    <div className="container">
+    <div className="container" style={{ padding: 'var(--space-12) var(--space-4) var(--space-24) var(--space-4)' }}>
       <header className={styles.header}>
-        <SectionHeading
-          eyebrow="Career History"
-          title="Experience & Technical Stack"
-          description="Selected software engineering roles, AI system deployments, and capabilities across application engineering and machine learning."
-          level={1}
-        />
+        <div style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', color: 'var(--accent)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 'var(--space-2)' }}>
+          CAREER HISTORY
+        </div>
+        <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 'var(--text-3xl)', marginBottom: 'var(--space-4)' }}>
+          Experience & Capabilities
+        </h1>
+        <p style={{ fontSize: 'var(--text-xl)', color: 'var(--text-secondary)', maxWidth: 'var(--max-width-prose)' }}>
+          Selected engineering projects, systems architecture, and technical stack.
+        </p>
       </header>
 
       {/* Timeline Section */}
       <section className={styles.section} aria-labelledby="roles-heading">
-        <SectionHeading
-          eyebrow="Employment Record"
-          title="Selected Roles & Impact"
-        />
+        <h2 id="roles-heading" style={{ fontFamily: 'var(--font-display)', fontSize: 'var(--text-2xl)', marginBottom: 'var(--space-6)' }}>
+          Selected Systems Impact
+        </h2>
 
         <div className={styles.timeline}>
           {experienceData.map((item) => (
@@ -48,18 +49,18 @@ export const ExperiencePage: React.FC = () => {
         </div>
       </section>
 
-      {/* Technical Stack & Capabilities */}
+      {/* Grouped Capabilities */}
       <section className={styles.section} aria-labelledby="stack-heading">
-        <SectionHeading
-          eyebrow="Capabilities Breakdown"
-          title="Technical Stack & Methodologies"
-        />
+        <h2 id="stack-heading" style={{ fontFamily: 'var(--font-display)', fontSize: 'var(--text-2xl)', marginBottom: 'var(--space-6)' }}>
+          Grouped Capabilities
+        </h2>
 
         <div className={styles.grid}>
           {capabilityGroups.map((group) => (
-            <div key={group.category} style={{ background: 'var(--color-surface)', padding: 'var(--space-6)', borderRadius: 'var(--radius-xl)', border: '1px solid var(--color-border)' }}>
-              <h3 style={{ fontSize: 'var(--text-h4)', marginBottom: 'var(--space-2)' }}>{group.category}</h3>
-              <p style={{ fontSize: 'var(--text-sm)', color: 'var(--color-muted)', marginBottom: 'var(--space-4)' }}>{group.description}</p>
+            <div key={group.category} style={{ background: 'var(--surface)', padding: 'var(--space-6)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--border)' }}>
+              <h3 style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', color: 'var(--accent)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 'var(--space-4)' }}>
+                {group.category}
+              </h3>
               <TagList tags={group.skills} />
             </div>
           ))}
