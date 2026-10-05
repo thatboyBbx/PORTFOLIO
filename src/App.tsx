@@ -1,6 +1,7 @@
-import React, { lazy, Suspense } from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import React, { lazy, Suspense, useEffect } from 'react';
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import PageShell from './components/layout/PageShell';
+import { getMetadata, applyMetadata } from './content/seo';
 import './styles/global.css';
 
 // Lazy-loaded route views
@@ -36,9 +37,22 @@ const PageLoader: React.FC = () => (
   </div>
 );
 
-export const App: React.FC = () => {
+const RouteMetadata: React.FC = () => {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    applyMetadata(getMetadata(pathname));
+  }, [pathname]);
+
+  return null;
+};
+
+const defaultPages = { LandingPage, AboutPage, ProjectsPage, CaseStudyPage, ExperiencePage, ContactPage, OfflinePage, NotFoundPage };
+type RoutePages = { [Key in keyof typeof defaultPages]: React.ComponentType };
+export const AppRoutes: React.FC<{ pages?: RoutePages }> = ({ pages = defaultPages }) => {
+  const { LandingPage, AboutPage, ProjectsPage, CaseStudyPage, ExperiencePage, ContactPage, OfflinePage, NotFoundPage } = pages;
   return (
-    <BrowserRouter>
+    <>
+      <RouteMetadata />
       <Routes>
         <Route path="/" element={<PageShell />}>
           <Route
@@ -119,8 +133,10 @@ export const App: React.FC = () => {
           />
         </Route>
       </Routes>
-    </BrowserRouter>
+    </>
   );
 };
+
+export const App: React.FC = () => <BrowserRouter><AppRoutes /></BrowserRouter>;
 
 export default App;

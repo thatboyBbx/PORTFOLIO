@@ -1,19 +1,46 @@
-import React from 'react';
-import { profileData } from '../content/profile';
-import styles from './ContactPage.module.css';
+import React from "react";
+import { profileData } from "../content/profile";
+import styles from "./ContactPage.module.css";
 
 export const ContactPage: React.FC = () => {
   return (
-    <div className="container" style={{ padding: 'var(--space-12) var(--space-4) var(--space-24) var(--space-4)' }}>
+    <div
+      className="container"
+      style={{
+        padding:
+          "var(--space-12) var(--space-4) var(--space-24) var(--space-4)",
+      }}
+    >
       <header className={styles.header}>
-        <div style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', color: 'var(--accent)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 'var(--space-2)' }}>
+        <div
+          style={{
+            fontFamily: "var(--font-mono)",
+            fontSize: "var(--text-xs)",
+            color: "var(--accent)",
+            textTransform: "uppercase",
+            letterSpacing: "0.08em",
+            marginBottom: "var(--space-2)",
+          }}
+        >
           DIRECT CONTACT
         </div>
-        <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 'var(--text-3xl)', marginBottom: 'var(--space-4)' }}>
-          Have a problem worth building around?
+        <h1
+          style={{
+            fontFamily: "var(--font-display)",
+            fontSize: "clamp(2.2rem, 5vw, 3.5rem)",
+            marginBottom: "var(--space-4)",
+          }}
+        >
+          Let’s work together.
         </h1>
-        <p style={{ fontSize: 'var(--text-xl)', color: 'var(--text-secondary)', maxWidth: 'var(--max-width-prose)' }}>
-          If you're working on a product, internal system, automation workflow or AI/ML application, get in touch.
+        <p
+          style={{
+            fontSize: "var(--text-xl)",
+            color: "var(--text-secondary)",
+            maxWidth: "var(--max-width-prose)",
+          }}
+        >
+          {profileData.contact.invitation}
         </p>
       </header>
 
@@ -23,8 +50,21 @@ export const ContactPage: React.FC = () => {
 
           <div className={styles.pathway}>
             <span className={styles.label}>Email Address</span>
-            <a href={`mailto:${profileData.contact.email}`} className={styles.value}>
+            <a
+              href={`mailto:${profileData.contact.email}`}
+              className={styles.value}
+            >
               {profileData.contact.email} →
+            </a>
+          </div>
+
+          <div className={styles.pathway}>
+            <span className={styles.label}>Phone</span>
+            <a
+              href={`tel:${profileData.contact.phone.replace(/\s/g, "")}`}
+              className={styles.value}
+            >
+              {profileData.contact.phone}
             </a>
           </div>
 
@@ -35,7 +75,12 @@ export const ContactPage: React.FC = () => {
 
           <div className={styles.pathway}>
             <span className={styles.label}>Curriculum Vitae</span>
-            <a href={profileData.contact.resumeUrl} target="_blank" rel="noopener noreferrer" className={styles.value}>
+            <a
+              href={profileData.contact.resumeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.value}
+            >
               Download CV (.pdf) ↗
             </a>
           </div>
@@ -45,16 +90,26 @@ export const ContactPage: React.FC = () => {
           <h2 className={styles.contactTitle}>Profiles & Code</h2>
 
           <div className={styles.pathway}>
-            <span className={styles.label}>LinkedIn</span>
-            <a href={profileData.contact.linkedin} target="_blank" rel="noopener noreferrer" className={styles.value}>
-              {profileData.contact.linkedin} ↗
+            <span className={styles.label}>GitHub</span>
+            <a
+              href={profileData.contact.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.value}
+            >
+              {profileData.contact.github} ↗
             </a>
           </div>
 
           <div className={styles.pathway}>
-            <span className={styles.label}>GitHub</span>
-            <a href={profileData.contact.github} target="_blank" rel="noopener noreferrer" className={styles.value}>
-              {profileData.contact.github} ↗
+            <span className={styles.label}>LinkedIn</span>
+            <a
+              href={profileData.contact.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.value}
+            >
+              {profileData.contact.linkedin} ↗
             </a>
           </div>
         </div>

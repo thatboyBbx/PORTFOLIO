@@ -33,7 +33,7 @@
 
 .title {
   font-family: var(--font-display);
-  font-size: var(--text-3xl);
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
   font-weight: 600;
   color: var(--text-primary);
   margin-bottom: var(--space-4);
@@ -52,6 +52,21 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--space-12);
+  min-width: 0;
+}
+
+.caseLayout > div,
+.section,
+.pipelineStep,
+.decisionCard {
+  min-width: 0;
+}
+
+.prose,
+.decisionRationale,
+.decisionTradeOff,
+.stepDetail {
+  overflow-wrap: anywhere;
 }
 
 @media (min-width: 900px) {
@@ -91,6 +106,7 @@
 }
 
 .section {
+  scroll-margin-top: 7rem;
   margin-bottom: var(--space-12);
   padding-bottom: var(--space-8);
   border-bottom: 1px solid var(--border);
@@ -107,7 +123,7 @@
 
 .sectionTitle {
   font-family: var(--font-display);
-  font-size: var(--text-2xl);
+  font-size: clamp(1.6rem, 3vw, 2.5rem);
   color: var(--text-primary);
   margin-bottom: var(--space-4);
 }
@@ -200,4 +216,284 @@
   font-size: var(--text-xs);
   color: var(--text-muted);
   font-style: italic;
+}
+
+.metadata,
+.technologies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+  align-items: center;
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+}
+.technologies {
+  list-style: none;
+  padding: 0;
+  margin: 24px 0 0;
+  gap: 8px;
+}
+.technologies li {
+  border: 1px solid var(--border);
+  padding: 5px 12px;
+  border-radius: 100px;
+  background: var(--surface);
+  font-size: var(--text-xs);
+}
+.list {
+  padding-left: 20px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+.list li + li {
+  margin-top: 8px;
+}
+.figure {
+  margin: 24px 0;
+}
+.figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+.figure figcaption {
+  margin-top: 10px;
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+.figure figcaption span {
+  color: var(--accent);
+  white-space: nowrap;
+}
+.components {
+  margin: 20px 0 0;
+}
+.components > div {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: 12px;
+  padding: 14px 0;
+  border-top: 1px solid var(--border);
+  font-size: var(--text-sm);
+}
+.components dt {
+  color: var(--accent);
+  font-weight: 600;
+}
+.components dd,
+.metrics dd {
+  margin: 0;
+  color: var(--text-secondary);
+}
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin: 24px 0;
+}
+.metrics > div {
+  padding: 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+.metrics dt {
+  font-size: var(--text-xs);
+  color: var(--accent);
+}
+.metrics .metricValue {
+  font-size: clamp(1.5rem, 3vw, 2.1rem);
+  font-family: var(--font-display);
+  color: var(--text-primary);
+  margin: 8px 0;
+}
+.metricDetail {
+  font-size: var(--text-xs);
+  line-height: 1.6;
+}
+.boundaries {
+  margin-top: 24px;
+  padding: 24px;
+  border-left: 3px solid var(--accent);
+  background: var(--surface);
+  border-radius: 0 12px 12px 0;
+}
+.sourceNote {
+  margin: 24px 0 0;
+  color: var(--text-secondary);
+  font-size: var(--text-xs);
+  line-height: 1.7;
+}
+.resources {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 20px;
+  font-size: var(--text-sm);
+}
+@media (max-width: 480px) {
+  .components > div {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+  .metrics > div {
+    padding: 14px;
+  }
+  .decisionCard,
+  .boundaries {
+    padding: 18px;
+  }
+}
+@media print {
+  @page {
+    size: A4;
+    margin: 14mm;
+  }
+  :global(body),
+  :global(#root),
+  :global(main),
+  :global(#root > div) {
+    background: white !important;
+    font-size: 10pt;
+  }
+  :global(main) {
+    padding: 0 !important;
+  }
+  :global(body > #root header:not(article header)),
+  :global(body > #root footer),
+  :global(body > #root main > a) {
+    display: none !important;
+  }
+  .container {
+    padding: 0;
+    max-width: none;
+  }
+  .backLink,
+  .stickyNav,
+  .resources {
+    display: none;
+  }
+  .header {
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+  }
+  .title {
+    font-size: 27pt;
+  }
+  .tagline {
+    font-size: 12pt;
+    margin-bottom: 10px;
+    line-height: 1.4;
+  }
+  .technologies {
+    margin-top: 12px;
+  }
+  .caseLayout {
+    display: block;
+  }
+  .section {
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+  }
+  .sectionTitle {
+    font-size: 17pt;
+    margin-bottom: 10px;
+  }
+  .sectionHeader,
+  .metadata,
+  .technologies li,
+  .figure figcaption,
+  .sourceNote {
+    font-size: 8pt;
+  }
+  .prose,
+  .list,
+  .components > div {
+    font-size: 9pt;
+    line-height: 1.4;
+  }
+  .prose {
+    max-width: none;
+    margin-bottom: 10px;
+  }
+  .list li + li {
+    margin-top: 5px;
+  }
+  .components > div {
+    padding: 8px 0;
+  }
+  .figure {
+    margin: 14px 0;
+    break-inside: avoid;
+  }
+  .figure img {
+    max-height: 72mm;
+    object-fit: contain;
+  }
+  .figure figcaption span {
+    display: none;
+  }
+  .decisionsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-top: 12px;
+  }
+  .decisionCard,
+  .boundaries,
+  .metrics > div {
+    padding: 12px;
+    break-inside: avoid;
+  }
+  .decisionTitle {
+    font-size: 12pt;
+  }
+  .decisionChoice,
+  .decisionRationale,
+  .decisionTradeOff,
+  .metricDetail {
+    font-size: 9pt;
+  }
+  .metrics {
+    margin: 12px 0;
+  }
+  .metrics .metricValue {
+    font-size: 18pt;
+  }
+  .section:global(#architecture),
+  .section:global(#outcome) {
+    break-before: page;
+  }
+  .twoPage .section:global(#outcome) {
+    break-before: auto;
+  }
+  .twoPage .sourceNote {
+    margin-top: 12px;
+    max-width: none;
+  }
+  .twoPage .section {
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+  }
+  .twoPage .decisionCard {
+    gap: 4px;
+  }
+  .twoPage .boundaries {
+    margin-top: 16px;
+  }
+  .twoPage .figure img {
+    max-height: 68mm;
+  }
+  .twoPage .decisionChoice,
+  .twoPage .decisionRationale,
+  .twoPage .decisionTradeOff {
+    line-height: 1.4;
+    margin-bottom: 8px;
+  }
+  :global(*) {
+    animation: none !important;
+    transition: none !important;
+  }
 }

@@ -1,17 +1,37 @@
+import { docudigitProject } from "./docudigit";
+import { spareProject } from "./spare";
+
 export interface CaseStudy {
   id: string;
   slug: string;
   number: string;
   title: string;
-  category: 'AI / ML Document Intelligence' | 'Systems & Offline-First' | 'Application Logic & Workflow' | 'Multi-Interface Systems';
+  category:
+    | "AI / ML Document Intelligence"
+    | "Systems & Workflow"
+    | "Information Retrieval"
+    | "Application Development";
   tagline: string;
   role: string;
-  status: 'Completed' | 'In development' | 'Research' | 'Experimental' | 'Academic project';
+  period?: string;
+  printPages?: 2 | 3;
+  figures?: {
+    section: "system" | "architecture";
+    src: string;
+    height?: number;
+    alt: string;
+    caption: string;
+  }[];
+  status:
+    | "Completed"
+    | "In development"
+    | "Research"
+    | "Experimental"
+    | "Academic project";
   featured: boolean;
   technologies: string[];
-  metrics: { label: string; value: string }[];
   visualFallback: {
-    type: 'diagram' | 'code' | 'benchmark' | 'abstract';
+    type: "diagram" | "code" | "benchmark" | "abstract";
     caption: string;
   };
   overview: {
@@ -35,293 +55,263 @@ export interface CaseStudy {
   evaluation: {
     summary: string;
     highlights: string[];
+    metrics?: { value: string; label: string; detail: string }[];
+    limitations?: string[];
+    nextSteps?: string;
+    sourceNote?: string;
   };
-  links: {
-    label: string;
-    url: string;
-    external?: boolean;
-  }[];
+  links: { label: string; url: string; external?: boolean }[];
 }
 
 export const projectsData: CaseStudy[] = [
   {
-    id: 'insureintel-zimbabwe',
-    slug: 'insureintel',
-    number: '01',
-    title: 'InsureIntel Zimbabwe',
-    category: 'AI / ML Document Intelligence',
-    tagline: 'AI-powered insurance document intelligence for Zimbabwe\'s insurance broker sector.',
-    role: 'Lead Application & AI Systems Engineer',
-    status: 'Completed',
+    id: "insureintel-zimbabwe",
+    slug: "insureintel",
+    number: "01",
+    title: "InsureIntel Zimbabwe",
+    category: "AI / ML Document Intelligence",
+    tagline:
+      "A CPU-first insurance document-intelligence prototype combining extraction, compliance triage, and insurer profiling.",
+    role: "Individual capstone · Design, development & evaluation",
+    period: "June 2026",
+    status: "Academic project",
     featured: true,
-    technologies: ['Python', 'FastAPI', 'Tesseract OCR', 'spaCy NER', 'TF-IDF / Logistic Regression', 'SQLite', 'JSONL', 'React'],
-    metrics: [
-      { label: 'Extraction Time', value: '< 2.4s' },
-      { label: 'NER Accuracy', value: '94.2% F1' },
-      { label: 'Manual Effort Saved', value: '~ 70%' }
+    technologies: [
+      "Python",
+      "FastAPI",
+      "spaCy",
+      "scikit-learn",
+      "PostgreSQL",
+      "ChromaDB",
     ],
-    visualFallback: {
-      type: 'diagram',
-      caption: 'Broker document intelligence pipeline: OCR -> Text Cleaning -> Classification -> Entity Extraction -> Compliance Analysis'
-    },
-    overview: {
-      outcome: 'Built an end-to-end AI document processing application for insurance brokers, automating policy document parsing, claim classification, and regulatory compliance extraction.',
-      context: 'Zimbabwean insurance brokerages handle high volumes of physical and PDF policy cover notes, claim assessments, and audit forms. Manual data entry caused operational bottlenecks, error prone compliance audits, and delayed claim processing.',
-      constraints: [
-        'Must process varied, unstructured scanned documents and mobile photo uploads',
-        'Transparent entity extraction with audit confidence bounds for broker verification',
-        'Lightweight deployment suitable for local hosting without cloud GPU dependency'
-      ],
-      approach: 'Constructed an automated processing pipeline combining Tesseract OCR for text extraction, TF-IDF + Logistic Regression for document classification, and custom spaCy Named Entity Recognition (NER) for policy terms extraction.'
-    },
-    pipelineSteps: [
-      { step: '01', label: 'Document Ingestion', detail: 'Receives PDF or image policy documents via API or web workspace.' },
-      { step: '02', label: 'OCR Extraction', detail: 'Runs Tesseract OCR with adaptive image binarization and orientation correction.' },
-      { step: '03', label: 'Classification', detail: 'Classifies document type (Policy, Claim Form, Assessment Report) via TF-IDF model.' },
-      { step: '04', label: 'Entity Extraction', detail: 'Extracts policy numbers, sums insured, premium amounts, dates, and claimant details using custom spaCy NER.' },
-      { step: '05', label: 'Analysis & Compliance', detail: 'Cross-checks extracted policy rules against regulatory requirements and structured schema.' }
-    ],
-    technicalDecisions: [
+    figures: [
       {
-        title: 'Custom spaCy NER over Generic LLM API',
-        choice: 'Trained dedicated spaCy NER pipeline on annotated Zimbabwean insurance policy corpus.',
-        rationale: 'Provided 100% deterministic entity boundaries, zero API latency/cost penalty, and ran on lightweight CPU backend.',
-        tradeOff: 'Required manual dataset annotation for new policy types.'
+        section: "system",
+        src: "/projects/insureintel/review-flow.svg",
+        alt: "Digital PDFs or scans enter text extraction, then document classification and entity extraction. Document checks and insurer profiling provide evidence for broker review; regulatory retrieval supports questions.",
+        caption:
+          "Original conceptual workflow. Outputs support broker judgment; they do not certify compliance.",
       },
       {
-        title: 'Modular Monolith Architecture',
-        choice: 'Structured Python FastAPI backend as a single deployable modular monolith with SQLite / JSONL logging.',
-        rationale: 'Simplified local infrastructure deployment for broker offices without microservice management overhead.',
-        tradeOff: 'Horizontal scaling is constrained to single-node thread boundaries.'
-      }
-    ],
-    systemArchitecture: {
-      summary: 'FastAPI service orchestrating document ingestion, OCR preprocessing, ML inference pipeline, and JSON audit logging.',
-      asciiDiagram: `
-                 ┌──────────────┐
-                 │   Browser    │
-                 └──────┬───────┘
-                        │
-                 ┌──────▼───────┐
-                 │   FastAPI    │
-                 └──────┬───────┘
-                        │
-          ┌─────────────┼─────────────┐
-          ▼             ▼             ▼
-       Documents      AI/ML        Auth
-          │             │
-          ▼             ▼
-        OCR          Analysis
-          │             │
-          └──────┬──────┘
-                 ▼
-             Registry
-      `,
-      components: [
-        { name: 'Tesseract Engine', description: 'Performs optical character recognition on scanned policy PDFs.' },
-        { name: 'Classification Module', description: 'TF-IDF classifier categorizing document types.' },
-        { name: 'spaCy NER Pipeline', description: 'Extracts structured domain entities from unstructured policy text.' },
-        { name: 'FastAPI Backend', description: 'Exposes document workspace REST endpoints and WebSocket status logs.' }
-      ]
-    },
-    evaluation: {
-      summary: 'Evaluated against a benchmark dataset of 500 real-world broker policy documents and claim forms.',
-      highlights: [
-        'Achieved 94.2% F1 score across 12 target insurance entity fields.',
-        'Processed 20-page document packages in under 2.4 seconds average turnaround.',
-        'Successfully deployed in live broker workflow evaluation.'
-      ]
-    },
-    links: [
-      { label: 'View Case Study', url: '/work/insureintel' },
-      { label: 'Technical Documentation', url: '#', external: true }
-    ]
-  },
-  {
-    id: 'spop-spare-parts',
-    slug: 'spop',
-    number: '02',
-    title: 'SPOP — Spare-Parts Operational Software',
-    category: 'Systems & Offline-First',
-    tagline: 'Offline-first operational software for spare-parts inventory, sales, and retail.',
-    role: 'Full-Stack Systems Engineer',
-    status: 'In development',
-    featured: true,
-    technologies: ['React', 'TypeScript', 'PWA', 'Firebase', 'SQLite / Dexie.js', 'Service Workers'],
-    metrics: [
-      { label: 'Offline Sync SLA', value: '100% atomic' },
-      { label: 'Inventory SKU Scale', value: '15,000+' },
-      { label: 'Transaction Latency', value: '< 15ms' }
+        section: "architecture",
+        src: "/projects/insureintel/data-architecture.svg",
+        alt: "A Jinja2 broker workspace connects to a FastAPI processing layer backed by PostgreSQL for structured records, MongoDB for OCR text, and ChromaDB for regulatory retrieval.",
+        caption:
+          "Original architecture summary, redrawn from the implementation description—not a screenshot of the application.",
+      },
     ],
     visualFallback: {
-      type: 'code',
-      caption: 'Local-first IndexedDB transaction queue with Conflict-free Conflict Resolution'
+      type: "diagram",
+      caption:
+        "OCR, entity extraction, document classification, and rules-based compliance review.",
     },
     overview: {
-      outcome: 'Architected an offline-first inventory management and point-of-sale system for spare-parts retail stores operating under unstable internet connectivity.',
-      context: 'Automotive spare-parts retailers in regional centers experience frequent network outages. Traditional cloud POS systems freeze during dropouts, halting counter sales and inventory lookups.',
+      outcome:
+        "Turning insurance documents into structured evidence for a broker’s first-pass review.",
+      context:
+        "Insurance brokers must read policy wordings, claims forms, treaty agreements, and correspondence to find terms, identify missing clauses, and assess insurer exposure. InsureIntel Zimbabwe explored how document intelligence could bring those tasks into one review workflow. I designed, implemented, and evaluated the academic prototype.",
       constraints: [
-        'Counter sales and stock searches must function 100% offline without network reliance',
-        'Automatic background sync when connectivity resumes without duplicate transaction writes',
-        'Strict role-based permissions (Cashier, Store Manager, Auditor) across local and synced states'
+        "Run locally on an 8th-generation Intel i5 with 16 GB RAM, without a GPU or paid model APIs.",
+        "Handle digital PDFs and scanned documents with limited authentic training material.",
+        "Keep findings reviewable and preserve human responsibility for insurance decisions.",
       ],
-      approach: 'Built a local-first Progressive Web Application using React, IndexedDB/SQLite local storage, and optimistic UI updates synced to Firebase upon network reconnection.'
+      approach:
+        "The pipeline tries pdfplumber text extraction first and routes low-text documents to Tesseract OCR. TF-IDF with Logistic Regression classifies four document types; a custom spaCy model extracts six entity types, including premiums, coverage limits, deductibles, and exclusions. Clause checks and a document-risk score support triage. A separate Corporate Solvency Profiling module combines four financial indicators and an XGBoost anomaly model. Regulatory retrieval uses MiniLM embeddings and ChromaDB to surface supporting passages with citations.",
     },
     technicalDecisions: [
       {
-        title: 'Local-First Transaction Queue',
-        choice: 'Queued sales transactions locally in IndexedDB with cryptographic event hashes.',
-        rationale: 'Guaranteed 0ms sales counter latency and zero sales loss during multi-hour internet outages.',
-        tradeOff: 'Requires local conflict resolution logic for concurrent multi-device stock updates.'
+        title: "Fit the model to the constraint",
+        choice:
+          "TF-IDF + Logistic Regression rather than a heavier classifier.",
+        rationale:
+          "A small, CPU-friendly model suited the vocabulary differences between the four document classes. Training used 847 labelled samples.",
+        tradeOff:
+          "Overlapping vocabulary made treaty agreements and correspondence harder to distinguish.",
       },
       {
-        title: 'Optimistic State Mutations',
-        choice: 'Updated UI inventory counters instantly before network confirmation.',
-        rationale: 'Maintained smooth cashier workflow during erratic network connectivity.',
-        tradeOff: 'Demands rollbacks in rare cases of stock allocation conflicts.'
-      }
+        title: "Fail closed on missing rules",
+        choice:
+          "Raise a configuration error when required clause files are missing.",
+        rationale:
+          "During development, missing knowledge files could silently produce a 100% compliance score. A startup guard and regression test replaced that misleading success path.",
+        tradeOff:
+          "Processing stops until configuration is repaired; availability does not take priority over trustworthy findings.",
+      },
     ],
     systemArchitecture: {
-      summary: 'Service worker cached application shell communicating with an offline IndexedDB storage layer and Firebase sync engine.',
+      summary:
+        "FastAPI exposes the processing services to a server-rendered Jinja2 workspace. JWT authentication and role checks distinguish administrators, brokers, and analysts. Three stores separate structured records, raw extraction output, and regulatory retrieval; this flexibility also increases local deployment complexity.",
       components: [
-        { name: 'Service Worker Shell', description: 'Caches UI assets and intercept fetch requests during network loss.' },
-        { name: 'IndexedDB Data Store', description: 'Stores local copy of 15,000+ SKUs and pending transactions.' },
-        { name: 'Sync Engine', description: 'Manages batch uploads and event sequence reconciliation upon reconnection.' },
-        { name: 'Firebase Cloud Storage', description: 'Central ledger for synchronized sales records and master catalog.' }
-      ]
+        {
+          name: "PostgreSQL",
+          description:
+            "Users, document records, compliance findings, insurer profiles, and audit records.",
+        },
+        {
+          name: "MongoDB",
+          description: "Raw OCR output and variable page structures.",
+        },
+        {
+          name: "ChromaDB",
+          description:
+            "Embedded regulatory passages drawn from the Insurance Act, 12 IPEC circulars, and an FSR-1 template.",
+        },
+      ],
     },
     evaluation: {
-      summary: 'Tested under simulated network disconnects, high concurrency counter sales, and offline power cycles.',
+      summary:
+        "These are dissertation-reported proof-of-concept results, not independently reproduced portfolio benchmarks. The document corpus contained 45 documents: 11 authentic seeds and 34 synthetic documents. The report describes 20% held-out splits for classification and NER; compliance thresholds and profiling weights were calibrated against the evaluation/reference data, so those results are not independent validation.",
+      metrics: [
+        {
+          value: "0.87",
+          label: "Classification F1",
+          detail: "Weighted average across four document types.",
+        },
+        {
+          value: "0.76",
+          label: "Entity extraction F1",
+          detail: "Micro-average; below the 0.85 research target.",
+        },
+        {
+          value: "0.91",
+          label: "Clause-check precision",
+          detail: "Mandatory clause detection; recall was 0.78.",
+        },
+        {
+          value: "12.4 / 34.7 s",
+          label: "Digital / scanned PDF",
+          detail:
+            "Mean processing time over ten runs per type on the local CPU setup.",
+        },
+      ],
       highlights: [
-        'Maintained full point-of-sale capability during 24-hour simulated network outage.',
-        'Synced 500+ offline sales events in under 3.2 seconds upon connection restore.',
-        'Passed strict RBAC security audit.'
-      ]
+        "The report records 68 passing development tests, including authentication, role restrictions, extraction, and the missing-rules guard.",
+        "Deductibles were the weakest entity type (F1 0.69): conditional wording led to incomplete extraction spans.",
+        "Solvency rankings achieved reported Kendall’s τ = 0.74 against a regulatory reference, after weight optimisation—not a prospective insurer-risk test.",
+      ],
+      limitations: [
+        "Mostly synthetic document data limits confidence in generalisation to real brokerage workloads.",
+        "Only six of approximately twelve browser routes were fully wired; retrieval-answer evaluation and multi-user validation remained incomplete.",
+        "The dissertation contains inconsistent anomaly-detection counts and metrics. Those results are intentionally omitted here; no production readiness or measured business savings are claimed.",
+      ],
+      nextSteps:
+        "Prioritise a larger anonymised authentic corpus, complete the review interface, and evaluate retrieval quality and user workflows with brokers before any production pilot.",
+      sourceNote:
+        "Source: University of Zimbabwe capstone dissertation, June 2026, implementation and results chapters. This condensed account anonymises client details and omits the full dissertation and source documents.",
     },
     links: [
-      { label: 'View Case Study', url: '/work/spop' },
-      { label: 'Architecture Spec', url: '#', external: true }
-    ]
+      {
+        label: "Download the 3-page case study (PDF)",
+        url: "/projects/insureintel/case-study.pdf",
+        external: true,
+      },
+    ],
   },
   {
-    id: 'autodirect-platform',
-    slug: 'autodirect',
-    number: '03',
-    title: 'AutoDirect Automotive Platform',
-    category: 'Application Logic & Workflow',
-    tagline: 'Workflow-driven automotive platform with multi-stage state transitions and Firestore transaction locking.',
-    role: 'Application Systems Engineer',
-    status: 'Completed',
+    id: "autodirect",
+    slug: "autodirect",
+    number: "02",
+    title: "AutoDirect",
+    category: "Systems & Workflow",
+    tagline:
+      "A mineral-freight marketplace connecting shippers and transporters through a shared seven-stage job lifecycle.",
+    role: "Full-stack project · Freight workflow & coordination",
+    printPages: 2,
+    status: "Completed",
     featured: true,
-    technologies: ['React', 'TypeScript', 'Firebase', 'Cloud Firestore', 'Cloud Functions', 'Node.js'],
-    metrics: [
-      { label: 'State Transitions', value: '14 stages' },
-      { label: 'Locking Latency', value: '< 80ms' },
-      { label: 'Transaction Integrity', value: '100%' }
+    technologies: ["React", "Firebase", "Firestore", "Transactions"],
+    figures: [
+      {
+        section: "system",
+        src: "/projects/autodirect/job-lifecycle.svg",
+        alt: "Seven stages: Posted, Matched, Accepted, Loading, In transit, Delivered, and Closed. Transactional acceptance checks availability and assigns one transporter; an already assigned job is not overwritten.",
+        caption:
+          "Original lifecycle diagram based on the project documentation. Acceptance is the contested transition; final closure follows confirmation by both parties.",
+      },
     ],
     visualFallback: {
-      type: 'diagram',
-      caption: 'Multi-stage vehicle lifecycle state machine with Firestore transactional locking'
+      type: "diagram",
+      caption:
+        "Seven-stage mineral-freight coordination with transactional assignment.",
     },
     overview: {
-      outcome: 'Designed a multi-stage vehicle sourcing, inspection, and sales application with strict transactional state management.',
-      context: 'Vehicle commercial transactions involve multi-step inspections, buyer reservations, document approvals, and transfer handoffs. Concurrent user actions frequently led to double-booking vehicle inventory.',
+      outcome:
+        "Connecting mineral shippers and transporters through one shared job record.",
+      context:
+        "Mineral freight is often arranged through calls, messages, and personal networks. Shippers lack visibility of available capacity, transporters struggle to find return-leg work, and both sides need a shared record of progress. AutoDirect applies a ride-sharing marketplace model to this coordination problem, with shipper and transporter workflows in a React application.",
       constraints: [
-        'Enforce linear state machine rules across 14 vehicle lifecycle stages',
-        'Prevent race conditions when multiple buyers attempt simultaneous reservation',
-        'Comprehensive audit log tracking every state mutation with timestamp and actor identity'
+        "Keep assignment consistent when multiple transporters accept the same job.",
+        "Represent seven named stages, with clear responsibilities and valid transitions.",
+        "Keep infrastructure lightweight and communicate failures on unreliable connections.",
       ],
-      approach: 'Implemented Firestore atomic transactions and Cloud Functions state guards to enforce deterministic vehicle lifecycle transitions.'
+      approach:
+        "A shipper posts cargo details, pickup, destination, and timing. Transporters see the request and express interest; one accepts the work. The job then advances through loading, transit, delivery, and closure. Both parties follow the same Firestore record through real-time updates. Acceptance reads availability and writes the assignment in one transaction. If a competing acceptance has already claimed the job, the losing action reports that it is taken rather than overwriting the assignment. Client-side fallbacks provide clear feedback and safe retry paths when the preferred action cannot complete.",
     },
     technicalDecisions: [
       {
-        title: 'Firestore Atomic Transaction Locks',
-        choice: 'Wrapped vehicle reservation updates in Firestore `runTransaction` blocks.',
-        rationale: 'Eliminated concurrent reservation race conditions with zero database lock escalation.',
-        tradeOff: 'Requires client retry loop handling transaction contention.'
+        title: "Check and claim atomically",
+        choice:
+          "Read availability and write assignment in one Firestore transaction.",
+        rationale:
+          "Separate checks and writes leave a race window. Transactional assignment checks shared job state before committing, rather than treating competing requests as independent bookings.",
+        tradeOff:
+          "Contention and failures need handling, alongside appropriate Firestore rules. The supplied document does not establish those rules.",
       },
       {
-        title: 'Explicit State Machine Guards',
-        choice: 'Defined valid state transitions in shared TypeScript types enforced by backend Cloud Functions.',
-        rationale: 'Prevented invalid lifecycle skips (e.g. reserving un-inspected vehicles).',
-        tradeOff: 'Adding new lifecycle steps requires coordinated client/server schema updates.'
-      }
+        title: "Make state and failure visible",
+        choice:
+          "Use named lifecycle stages, a shared record, and explicit failure feedback.",
+        rationale:
+          "Named stages clarify the next action. Shared updates reduce confirmation calls; fallback handling distinguishes saved actions from failed attempts.",
+        tradeOff:
+          "The managed backend reduces maintenance but depends on Firebase and connectivity. Live GPS tracking remains a proposed extension.",
+      },
     ],
     systemArchitecture: {
-      summary: 'React client executing transactional updates through Firestore security rules and backend state guard functions.',
+      summary:
+        "The documented architecture is a React single-page application communicating directly with Firebase. Firestore stores job records, streams status changes, and provides transactions for assignment. A dedicated custom server is not part of this documented design.",
       components: [
-        { name: 'State Machine Engine', description: 'Validates lifecycle transitions and actor permission masks.' },
-        { name: 'Firestore Database', description: 'Stores vehicle document records and lock metadata.' },
-        { name: 'Audit Logger', description: 'Immutable log recording every state transition payload.' }
-      ]
-    },
-    evaluation: {
-      summary: 'Stressed with concurrent reservation requests and multi-role inspection updates.',
-      highlights: [
-        'Zero instances of double-booking across load testing simulations.',
-        '100% audit record completeness verified across 14 state stages.'
-      ]
-    },
-    links: [
-      { label: 'View Case Study', url: '/work/autodirect' }
-    ]
-  },
-  {
-    id: 'foodies-system',
-    slug: 'foodies',
-    number: '04',
-    title: 'Foodies Food-Service System',
-    category: 'Multi-Interface Systems',
-    tagline: 'Multi-interface food-service system featuring self-service Kiosk, QR ordering, and Kitchen Display System.',
-    role: 'Application Developer',
-    status: 'Completed',
-    featured: true,
-    technologies: ['React', 'TypeScript', 'Node.js', 'Express', 'WebSocket', 'Tailwind CSS'],
-    metrics: [
-      { label: 'Order Latency', value: '< 120ms' },
-      { label: 'KDS Sync', value: 'Real-time' },
-      { label: 'Interfaces', value: '4 unified' }
-    ],
-    visualFallback: {
-      type: 'abstract',
-      caption: 'Real-time WebSocket event loop broadcasting orders between Kiosk, Mobile QR, and Kitchen Display System'
-    },
-    overview: {
-      outcome: 'Built a multi-screen food service system connecting self-ordering kiosks, customer QR ordering, a Kitchen Display System (KDS), and POS admin.',
-      context: 'Busy restaurant environments require continuous real-time synchronization between order entry channels and kitchen line displays to prevent order delays and missed tickets.',
-      constraints: [
-        'Sub-second real-time order broadcast from self-ordering screens to kitchen monitors',
-        'Unified menu data model powering touchscreen kiosk, mobile browser QR, and staff POS',
-        'Resilient WebSocket reconnection handling for kitchen environment stability'
+        {
+          name: "React application",
+          description:
+            "Shipper job posting and tracking; transporter discovery, acceptance, and progress updates.",
+        },
+        {
+          name: "Firestore",
+          description:
+            "Shared job records, real-time status updates, and transactional assignment.",
+        },
+        {
+          name: "Client fallbacks",
+          description:
+            "Failure feedback and safe retries when the preferred path cannot finish; not a verified offline-sync system.",
+        },
       ],
-      approach: 'Developed an event-driven Node.js/WebSocket backend powering unified React client interfaces optimized for touchscreen kiosks, mobile web, and wall-mounted kitchen displays.'
-    },
-    technicalDecisions: [
-      {
-        title: 'Unified WebSocket Event Bus',
-        choice: 'Engineered custom WebSocket event dispatcher broadcasting order lifecycle events.',
-        rationale: 'Provided instant (<120ms) kitchen display ticket creation without polling HTTP servers.',
-        tradeOff: 'Requires heartbeat connection monitoring and client state resynchronization on reconnect.'
-      }
-    ],
-    systemArchitecture: {
-      summary: 'Central Express/WebSocket server broadcasting order state changes to multi-interface React clients.',
-      components: [
-        { name: 'Self-Service Kiosk', description: 'Touchscreen ordering UI optimized for fast customer menu navigation.' },
-        { name: 'Kitchen Display System (KDS)', description: 'Line cook ticket interface showing real-time order status and prep timers.' },
-        { name: 'QR Ordering Web App', description: 'Mobile web app enabling table-side ordering without app installation.' },
-        { name: 'Express WebSocket Hub', description: 'Real-time order broker managing status transitions.' }
-      ]
     },
     evaluation: {
-      summary: 'Tested across simultaneous kiosk orders and multi-screen KDS kitchen displays.',
+      summary:
+        "The supplied documentation reports a complete posting-to-closure workflow, transactional assignment, and graceful failure handling. It provides a concrete design account, but no repository, automated test results, deployment evidence, or measured operating outcomes were supplied for independent verification.",
       highlights: [
-        'Maintained instant kitchen ticket rendering under peak ordering simulations.',
-        'Unified menu state synchronized across 4 distinct user interfaces.'
-      ]
+        "Seven stages connect marketplace discovery with delivery and a retained completion record.",
+        "The acceptance walkthrough explains the contention case: the first successful claim assigns the transporter; a later claimant receives a taken-job message.",
+      ],
+      limitations: [
+        "Concurrency guarantees, permissions, and retry behaviour still need source-code and test evidence; the document alone does not prove all race conditions are covered.",
+        "Reduced empty journeys, lower costs, and fewer disputes are intended benefits, not measured pilot results.",
+      ],
+      nextSteps:
+        "Validate competing acceptance requests, invalid transitions, and network failures. GPS tracking, reputation, pricing suggestions, payments, and shipment documents remain proposed extensions.",
+      sourceNote:
+        "Source: AutoDirect portfolio documentation supplied in October 2026. This condensed account distinguishes documented implementation from independent verification and proposed features.",
     },
     links: [
-      { label: 'View Case Study', url: '/work/foodies' }
-    ]
-  }
+      {
+        label: "Download the 2-page case study (PDF)",
+        url: "/projects/autodirect/case-study.pdf",
+        external: true,
+      },
+    ],
+  },
+  docudigitProject,
+  spareProject,
 ];

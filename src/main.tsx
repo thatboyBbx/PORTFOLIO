@@ -1,5 +1,5 @@
 import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
+import { createRoot, hydrateRoot } from 'react-dom/client';
 import { registerSW } from 'virtual:pwa-register';
 import './index.css';
 import App from './App.tsx';
@@ -14,8 +14,16 @@ registerSW({
   },
 });
 
-createRoot(document.getElementById('root')!).render(
+const root = document.getElementById('root')!;
+const app = (
   <StrictMode>
     <App />
   </StrictMode>
 );
+// A fallback-served page must not hydrate HTML rendered for a different route.
+const currentPath = window.location.pathname.replace(/\/+$/, '') || '/';
+if (root.hasChildNodes() && root.dataset.route === currentPath) {
+  hydrateRoot(root, app);
+} else {
+  createRoot(root).render(app);
+}

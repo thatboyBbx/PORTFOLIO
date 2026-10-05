@@ -1,78 +1,93 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { profileData } from '../content/profile';
 import { capabilityGroups } from '../content/experience';
 import styles from './AboutPage.module.css';
 
-export const AboutPage: React.FC = () => {
-  return (
-    <div className="container" style={{ padding: 'var(--space-12) var(--space-4) var(--space-24) var(--space-4)' }}>
-      <header className={styles.header}>
-        <div style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', color: 'var(--accent)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 'var(--space-2)' }}>
-          ABOUT & BACKGROUND
-        </div>
-        <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 'var(--text-3xl)', marginBottom: 'var(--space-4)' }}>
-          Panashe Bobojani
-        </h1>
-        <p style={{ fontSize: 'var(--text-xl)', color: 'var(--text-secondary)', maxWidth: 'var(--max-width-prose)' }}>
-          I build software systems around real operational problems.
-        </p>
-      </header>
+export const AboutPage: React.FC = () => (
+  <div className={`container ${styles.page}`}>
+    <header className={styles.intro}>
+      <div className={styles.introCopy}>
+        <p className={styles.eyebrow}>About & background</p>
+        <h1 className={styles.name}>{profileData.name}</h1>
+        <p className={styles.lead}>{profileData.bio[0]}</p>
+        <ul className={styles.disciplines} aria-label="Areas of focus">
+          <li>Application development</li>
+          <li>Workflow Automation</li>
+          <li>AI / ML</li>
+        </ul>
+      </div>
 
-      <article className={styles.bioSection}>
-        {profileData.bio.map((paragraph, idx) => (
-          <p key={idx} className={styles.bioParagraph}>
-            {paragraph}
-          </p>
+      <aside className={styles.profilePanel} aria-labelledby="education-heading">
+        <p className={styles.eyebrow}>Academic foundation</p>
+        <h2 id="education-heading" className={styles.panelHeading}>Education</h2>
+        {profileData.education.map((education) => (
+          <div key={`${education.institution}-${education.degree}`} className={styles.education}>
+            <p className={styles.degree}>{education.degree}</p>
+            <p className={styles.field}>{education.field}</p>
+            <p className={styles.educationMeta}>{education.institution}<br />{education.year}</p>
+            {education.honors && <p className={styles.honors}>{education.honors}</p>}
+          </div>
         ))}
-      </article>
-
-      {/* Technical Capabilities */}
-      <section className={styles.section} aria-labelledby="skills-heading">
-        <div style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', color: 'var(--accent)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 'var(--space-2)' }}>
-          TECHNICAL PROFILE
+        <div className={styles.panelFooter}>
+          <span>{profileData.contact.location}</span>
+          <a href={profileData.contact.resumeUrl} target="_blank" rel="noopener noreferrer" className={styles.textLink}>View résumé <span aria-hidden="true">↗</span></a>
         </div>
-        <h2 id="skills-heading" style={{ fontFamily: 'var(--font-display)', fontSize: 'var(--text-2xl)', marginBottom: 'var(--space-6)' }}>
-          Grouped Capabilities
-        </h2>
+      </aside>
+    </header>
 
-        <div className={styles.grid}>
-          {capabilityGroups.map((group) => (
-            <div key={group.category} className={styles.card}>
-              <h3 style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', color: 'var(--accent)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
-                {group.category}
-              </h3>
-              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 'var(--space-1)' }}>
-                {group.skills.map((skill) => (
-                  <li key={skill} style={{ fontSize: 'var(--text-sm)', color: 'var(--text-primary)' }}>
-                    {skill}
-                  </li>
-                ))}
-              </ul>
+    <section className={styles.story} aria-labelledby="perspective-heading">
+      <div className={styles.sectionIntro}>
+        <p className={styles.eyebrow}>Perspective</p>
+        <h2 id="perspective-heading" className={styles.sectionTitle}>From problem to working system.</h2>
+      </div>
+      <div className={styles.bio}>
+        {profileData.bio.slice(1).map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+      </div>
+    </section>
+
+    <section className={styles.section} aria-labelledby="skills-heading">
+      <div className={styles.sectionHeader}>
+        <div>
+          <p className={styles.eyebrow}>Technical profile</p>
+          <h2 id="skills-heading" className={styles.sectionTitle}>Capabilities</h2>
+        </div>
+        <Link to="/experience" className={styles.textLink}>Explore my experience <span aria-hidden="true">↗</span></Link>
+      </div>
+      <div className={styles.capabilityGrid}>
+        {capabilityGroups.map((group, index) => (
+          <article key={group.category} className={styles.capability}>
+            <div className={styles.capabilityHeader}>
+              <span className={styles.index} aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+              <h3 className={styles.capabilityTitle}>{group.category}</h3>
             </div>
-          ))}
-        </div>
-      </section>
+            <ul className={styles.skills}>
+              {group.skills.map((skill) => <li key={skill}>{skill}</li>)}
+            </ul>
+          </article>
+        ))}
+      </div>
+    </section>
 
-      {/* Principles */}
-      <section className={styles.section} aria-labelledby="principles-heading">
-        <div style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', color: 'var(--accent)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 'var(--space-2)' }}>
-          ENGINEERING METHODOLOGY
-        </div>
-        <h2 id="principles-heading" style={{ fontFamily: 'var(--font-display)', fontSize: 'var(--text-2xl)', marginBottom: 'var(--space-6)' }}>
-          Working Principles
-        </h2>
-
-        <div className={styles.grid}>
-          {profileData.workingPrinciples.map((principle) => (
-            <div key={principle.title} className={styles.card}>
-              <h3 className={styles.cardTitle}>{principle.title}</h3>
-              <p className={styles.cardDesc}>{principle.description}</p>
+    <section className={styles.principlesSection} aria-labelledby="principles-heading">
+      <div className={styles.sectionIntro}>
+        <p className={styles.eyebrow}>Working approach</p>
+        <h2 id="principles-heading" className={styles.sectionTitle}>Principles that shape the work.</h2>
+        <Link to="/work" className={styles.textLink}>See them in practice <span aria-hidden="true">↗</span></Link>
+      </div>
+      <ol className={styles.principles}>
+        {profileData.workingPrinciples.map((principle, index) => (
+          <li key={principle.title} className={styles.principle}>
+            <span className={styles.principleNumber} aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+            <div>
+              <h3 className={styles.principleTitle}>{principle.title}</h3>
+              <p>{principle.description}</p>
             </div>
-          ))}
-        </div>
-      </section>
-    </div>
-  );
-};
+          </li>
+        ))}
+      </ol>
+    </section>
+  </div>
+);
 
 export default AboutPage;

@@ -2,35 +2,26 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
 
-// https://vite.dev/config/
-export default defineConfig({
+export default defineConfig(({ isSsrBuild }) => ({
+  build: { manifest: !isSsrBuild },
   plugins: [
     react(),
-    VitePWA({
+    ...(!isSsrBuild ? [VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['favicon.ico', 'robots.txt', 'pwa-192x192.png', 'pwa-512x512.png'],
+      includeAssets: ['favicon.svg', 'pwa-icon.svg', 'robots.txt', 'Panashe_Bobojani_CV.pdf'],
       manifest: {
-        name: 'Alex Vance — AI/ML Application Engineer Portfolio',
-        short_name: 'AlexVance AI/ML',
-        description:
-          'Portfolio of Computer Scientist & Application Engineer specializing in AI/ML systems and scalable software.',
-        theme_color: '#090d16',
-        background_color: '#090d16',
+        name: 'Panashe Bobojani — AI/ML Portfolio',
+        short_name: 'Panashe Portfolio',
+        description: 'Portfolio of Panashe Bobojani, an AI and Machine Learning graduate and software engineer.',
+        theme_color: '#E9EDF3',
+        background_color: '#E9EDF3',
         display: 'standalone',
         orientation: 'portrait',
         icons: [
-          {
-            src: '/pwa-192x192.png',
-            sizes: '192x192',
-            type: 'image/png',
-          },
-          {
-            src: '/pwa-512x512.png',
-            sizes: '512x512',
-            type: 'image/png',
-          },
-        ],
-      },
-    }),
-  ],
-});
+          { src: '/pwa-192.png', sizes: '192x192', type: 'image/png', purpose: 'any' },
+          { src: '/pwa-512.png', sizes: '512x512', type: 'image/png', purpose: 'any maskable' }
+        ]
+      }
+    })] : [])
+  ]
+}));

@@ -1,5 +1,6 @@
 import React from 'react';
-import { experienceData, capabilityGroups } from '../content/experience';
+import { Link } from 'react-router-dom';
+import { experienceData } from '../content/experience';
 import TagList from '../components/ui/TagList';
 import styles from './ExperiencePage.module.css';
 
@@ -10,18 +11,18 @@ export const ExperiencePage: React.FC = () => {
         <div style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', color: 'var(--accent)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 'var(--space-2)' }}>
           CAREER HISTORY
         </div>
-        <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 'var(--text-3xl)', marginBottom: 'var(--space-4)' }}>
-          Experience & Capabilities
+        <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(2.2rem, 5vw, 3.5rem)', marginBottom: 'var(--space-4)' }}>
+          Experience
         </h1>
         <p style={{ fontSize: 'var(--text-xl)', color: 'var(--text-secondary)', maxWidth: 'var(--max-width-prose)' }}>
-          Selected engineering projects, systems architecture, and technical stack.
+          Practical experience in application development, applied AI, and digital skills training.
         </p>
       </header>
 
       {/* Timeline Section */}
       <section className={styles.section} aria-labelledby="roles-heading">
         <h2 id="roles-heading" style={{ fontFamily: 'var(--font-display)', fontSize: 'var(--text-2xl)', marginBottom: 'var(--space-6)' }}>
-          Selected Systems Impact
+          Professional experience
         </h2>
 
         <div className={styles.timeline}>
@@ -49,23 +50,9 @@ export const ExperiencePage: React.FC = () => {
         </div>
       </section>
 
-      {/* Grouped Capabilities */}
-      <section className={styles.section} aria-labelledby="stack-heading">
-        <h2 id="stack-heading" style={{ fontFamily: 'var(--font-display)', fontSize: 'var(--text-2xl)', marginBottom: 'var(--space-6)' }}>
-          Grouped Capabilities
-        </h2>
-
-        <div className={styles.grid}>
-          {capabilityGroups.map((group) => (
-            <div key={group.category} style={{ background: 'var(--surface)', padding: 'var(--space-6)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--border)' }}>
-              <h3 style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', color: 'var(--accent)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 'var(--space-4)' }}>
-                {group.category}
-              </h3>
-              <TagList tags={group.skills} />
-            </div>
-          ))}
-        </div>
-      </section>
+      <div className={styles.section}>
+        <Link to="/work">Explore the project case studies →</Link>
+      </div>
     </div>
   );
 };

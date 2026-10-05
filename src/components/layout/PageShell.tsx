@@ -1,9 +1,33 @@
-import React, { useState } from 'react';
-import { Link, NavLink, Outlet } from 'react-router-dom';
+import React, { useState, useEffect, useRef } from 'react';
+import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
+import { profileData } from '../../content/profile';
 import styles from './PageShell.module.css';
 
 export const PageShell: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const toggleRef = useRef<HTMLButtonElement>(null);
+  const mainRef = useRef<HTMLElement>(null);
+  const { pathname } = useLocation();
+  const previousPath = useRef(pathname);
+
+  useEffect(() => {
+    if (previousPath.current === pathname) return;
+    previousPath.current = pathname;
+    mainRef.current?.focus({ preventScroll: true });
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }, [pathname]);
+
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+    const onEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setMobileMenuOpen(false);
+        toggleRef.current?.focus();
+      }
+    };
+    document.addEventListener('keydown', onEscape);
+    return () => document.removeEventListener('keydown', onEscape);
+  }, [mobileMenuOpen]);
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen((prev) => !prev);
@@ -14,8 +38,9 @@ export const PageShell: React.FC = () => {
   };
 
   const navItems = [
-    { label: 'Work', path: '/' },
+    { label: 'Work', path: '/work' },
     { label: 'About', path: '/about' },
+    { label: 'Experience', path: '/experience' },
     { label: 'Contact', path: '/contact' },
   ];
 
@@ -48,7 +73,7 @@ export const PageShell: React.FC = () => {
               </NavLink>
             ))}
             <a
-              href="/Panashe_Bobojani_CV.pdf"
+              href={profileData.contact.resumeUrl}
               target="_blank"
               rel="noopener noreferrer"
               className={styles.navLink}
@@ -60,9 +85,11 @@ export const PageShell: React.FC = () => {
           {/* Mobile Menu Toggle */}
           <button
             type="button"
+            ref={toggleRef}
             className={styles.mobileMenuBtn}
             onClick={toggleMobileMenu}
             aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-navigation"
             aria-label={mobileMenuOpen ? 'Close Navigation Menu' : 'Open Navigation Menu'}
           >
             <svg
@@ -86,8 +113,7 @@ export const PageShell: React.FC = () => {
         </div>
 
         {/* Mobile Navigation Drawer */}
-        {mobileMenuOpen && (
-          <nav className={styles.mobileNav} aria-label="Mobile Navigation">
+          <nav id="mobile-navigation" hidden={!mobileMenuOpen} className={styles.mobileNav} aria-label="Mobile Navigation">
             {navItems.map((item) => (
               <NavLink
                 key={item.path}
@@ -102,7 +128,7 @@ export const PageShell: React.FC = () => {
               </NavLink>
             ))}
             <a
-              href="/Panashe_Bobojani_CV.pdf"
+              href={profileData.contact.resumeUrl}
               target="_blank"
               rel="noopener noreferrer"
               onClick={closeMobileMenu}
@@ -111,11 +137,10 @@ export const PageShell: React.FC = () => {
               Resume ↗
             </a>
           </nav>
-        )}
       </header>
 
       {/* Main Content Landmark */}
-      <main id="main-content" className={`${styles.main} page-enter`}>
+      <main id="main-content" ref={mainRef} tabIndex={-1} className={`${styles.main} page-enter`}>
         <Outlet />
       </main>
 
@@ -131,10 +156,10 @@ export const PageShell: React.FC = () => {
           </div>
 
           <div className={styles.footerLinks}>
-            <a href="mailto:panashe.bobojani@example.com" className={styles.footerLink}>Email</a>
-            <a href="https://github.com/thatboyBbx" target="_blank" rel="noopener noreferrer" className={styles.footerLink}>GitHub ↗</a>
-            <a href="https://linkedin.com/in/example-panashe-bobojani" target="_blank" rel="noopener noreferrer" className={styles.footerLink}>LinkedIn ↗</a>
-            <a href="/Panashe_Bobojani_CV.pdf" target="_blank" rel="noopener noreferrer" className={styles.footerLink}>CV ↗</a>
+            <a href={`mailto:${profileData.contact.email}`} className={styles.footerLink}>Email</a>
+            <a href={profileData.contact.github} target="_blank" rel="noopener noreferrer" className={styles.footerLink}>GitHub ↗</a>
+            <a href={profileData.contact.linkedin} target="_blank" rel="noopener noreferrer" className={styles.footerLink}>LinkedIn ↗</a>
+            <a href={profileData.contact.resumeUrl} target="_blank" rel="noopener noreferrer" className={styles.footerLink}>CV ↗</a>
           </div>
         </div>
       </footer>

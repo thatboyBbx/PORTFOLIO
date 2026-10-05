@@ -8,19 +8,21 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--color-accent);
+  color: var(--accent);
   margin-bottom: var(--space-2);
 }
 
 .title {
-  color: var(--color-text);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  overflow-wrap: anywhere;
+  color: var(--text-primary);
   margin-bottom: var(--space-3);
   line-height: var(--line-height-heading);
 }
 
 .description {
-  color: var(--color-text-secondary);
-  font-size: var(--text-body);
-  max-width: var(--max-width-content);
+  color: var(--text-secondary);
+  font-size: var(--text-base);
+  max-width: var(--max-width-prose);
   margin-bottom: 0;
 }

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 350" role="img" aria-labelledby="title desc">
+<title id="title">InsureIntel application and storage architecture</title><desc id="desc">A Jinja2 broker workspace connects to FastAPI, backed by PostgreSQL for structured records, MongoDB for OCR data, and ChromaDB for regulatory retrieval.</desc>
+<rect width="720" height="350" rx="14" fill="#f6f8fb"/>
+<g font-family="Arial, sans-serif" fill="#1a1a1e"><text x="28" y="32" font-size="12" letter-spacing="2" fill="#3d5a80">APPLICATION / THREE DISTINCT DATA RESPONSIBILITIES</text>
+<rect x="180" y="54" width="360" height="58" rx="8" fill="white" stroke="#bbc7d5"/><text x="360" y="79" text-anchor="middle" font-size="16" font-weight="600">Broker workspace · Jinja2</text><text x="360" y="98" text-anchor="middle" font-size="12" fill="#58677a">Server-rendered interface / role-based access</text>
+<rect x="94" y="148" width="532" height="66" rx="8" fill="#3d5a80"/><text x="360" y="175" text-anchor="middle" font-size="18" font-weight="600" fill="white">FastAPI processing layer</text><text x="360" y="196" text-anchor="middle" font-size="12" fill="#edf2f8">Extraction · NLP · document checks · profiling · retrieval</text>
+<g fill="white" stroke="#bbc7d5"><rect x="28" y="254" width="204" height="70" rx="8"/><rect x="258" y="254" width="204" height="70" rx="8"/><rect x="488" y="254" width="204" height="70" rx="8"/></g>
+<g font-size="17" font-weight="600"><text x="46" y="283">PostgreSQL</text><text x="276" y="283">MongoDB</text><text x="506" y="283">ChromaDB</text></g><g font-size="12" fill="#58677a"><text x="46" y="307">Structured records &amp; audit</text><text x="276" y="307">Raw OCR &amp; page data</text><text x="506" y="307">Regulatory text embeddings</text></g></g>
+<g fill="none" stroke="#3d5a80" stroke-width="1.8"><path d="M360 112V148M360 214V254M130 254V234H590V254M360 214V234"/></g>
+</svg>
