@@ -68,8 +68,7 @@ update tests/policy if introducing analytics or a contact form.
 `npm run check:release` is the release gate. GitHub Actions runs it for pushes and
 PRs, using read-only repository permissions and pinned action revisions. It
 does not deploy or push code. Automated dependency update PRs are configured for
-npm and Actions. Their remote execution remains unverified until the workflow
-is pushed to GitHub.
+npm and Actions. The initial `main` release workflow passed on 5 October 2026.
 
 `npm run check:performance` runs three cold, throttled mobile Chrome measurements
 for Home and AutoDirect. It checks median LCP <= 2.5s and CLS <= 0.1, and records

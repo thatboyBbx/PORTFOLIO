@@ -100,8 +100,9 @@ Open deployment checks:
   if exact HTTP redirects are required. PDF and diagram paths remain intact.
 - Check the actual appearance in external sharing clients; crawler requests and
   metadata were verified, but third-party rendering was not.
-- Run the GitHub workflow after signing into GitHub CLI and pushing the release.
-  The CLI is currently unauthenticated, so remote execution was not available.
+- The first GitHub `main` release workflow passed for commit `b46aaec` on
+  5 October 2026, including build, browser tests and dependency audit.
+  [Run details](https://github.com/thatboyBbx/PORTFOLIO/actions/runs/37294453401).
 - Manually test native 200% browser zoom, a screen reader and physical phones.
 - Measure representative real-user interaction/INP after traffic is available.
 
